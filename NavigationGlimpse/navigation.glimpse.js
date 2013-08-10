@@ -1,9 +1,10 @@
-﻿(function (pubsub) {
+﻿(function ($, pubsub) {
     var navigation = {};
 
     (function () {
         var setup = function () {
             navigation.scope.html('<canvas id="navigation-glimpse"></canvas>');
+            navigation.canvas = $('#navigation-glimpse')[0];
         };
         pubsub.subscribe('trigger.navigation.shell.init', setup);
     })();
@@ -33,4 +34,4 @@
         pubsub.subscribe('action.panel.rendering.navigation_glimpse', prerender);
         pubsub.subscribe('action.panel.rendered.navigation_glimpse', postrender);
     })();
-})(glimpse.pubsub);
+})(jQueryGlimpse, glimpse.pubsub);
