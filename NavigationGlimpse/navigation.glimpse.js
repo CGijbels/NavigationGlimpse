@@ -5,6 +5,7 @@
         var setup = function () {
             navigation.scope.html('<canvas id="navigation-glimpse"></canvas>');
             navigation.canvas = $('#navigation-glimpse')[0];
+            navigation.canvas.context = navigation.canvas.getContext("2d");
         };
         pubsub.subscribe('trigger.navigation.shell.init', setup);
     })();
