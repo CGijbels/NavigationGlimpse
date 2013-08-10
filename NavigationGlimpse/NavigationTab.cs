@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NavigationGlimpse
 {
-    public class NavigationTab : TabBase
+    public class NavigationTab : TabBase, IKey
     {
         public override object GetData(ITabContext context)
         {
@@ -20,6 +20,14 @@ namespace NavigationGlimpse
             get 
             { 
                 return "Navigation";
+            }
+        }
+
+        public string Key
+        {
+            get
+            {
+                return "navigation_glimpse";
             }
         }
     }
