@@ -1,4 +1,4 @@
-﻿(function ($, pubsub, tab, render) {
+﻿(function (pubsub) {
     var navigation = {};
 
     (function () {
@@ -33,4 +33,4 @@
         pubsub.subscribe('action.panel.rendering.navigation_glimpse', prerender);
         pubsub.subscribe('action.panel.rendered.navigation_glimpse', postrender);
     })();
-})(jQueryGlimpse, glimpse.pubsub, glimpse.tab, glimpse.render);
+})(glimpse.pubsub);
