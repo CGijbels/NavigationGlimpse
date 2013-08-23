@@ -12,7 +12,7 @@ namespace NavigationGlimpse
     {
         public override object GetData(ITabContext context)
         {
-            return StateInfoConfig.Dialogs;
+            return Canvas.Arrange();
         }
 
         public override string Name
