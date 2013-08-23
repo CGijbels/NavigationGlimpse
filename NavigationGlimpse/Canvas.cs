@@ -9,8 +9,6 @@ namespace NavigationGlimpse
 {
     public class Canvas
     {
-        private const int StartX = 50;
-        private const int StartY = 50;
         private const int StateElementWidth = 150;
         private const int WidthBetweenPoints = 10;
 

@@ -26,10 +26,10 @@ namespace NavigationGlimpse
             Transition = trans;
         }
 
-        private Transition Transition
+        public Transition Transition
         {
             get;
-            set;
+            private set;
         }
 
         public State From
