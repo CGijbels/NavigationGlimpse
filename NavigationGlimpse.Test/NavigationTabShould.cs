@@ -29,9 +29,21 @@ namespace NavigationGlimpse.Test
         }
 
         [TestMethod]
-        public void SetDepth0ForSingleTransition()
+        public void SetDepthTo0ForSingleTransition()
         {
             Assert.AreEqual(0, GetTransition("D1", "S1", "T1").Depth);
+        }
+
+        [TestMethod]
+        public void SetX1To85ForSingleTransitionFromState1()
+        {
+            Assert.AreEqual(85, GetTransition("D1", "S1", "T1").X1);
+        }
+
+        [TestMethod]
+        public void SetX2To275ForSingleTransitionToState2()
+        {
+            Assert.AreEqual(275, GetTransition("D1", "S1", "T1").X2);
         }
     }
 }

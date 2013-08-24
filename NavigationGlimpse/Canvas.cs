@@ -43,7 +43,7 @@ namespace NavigationGlimpse
                         p.SetCoords(state, start);
                         start += TransitionSeparation;
                     }
-                    stateX += StateSeparation;
+                    stateX += StateWidth + StateSeparation;
                 }
             }
             return new Tuple<List<StateElement>,List<TransitionElement>>(stateElements, transitionElements);
