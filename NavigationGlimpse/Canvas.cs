@@ -2,19 +2,24 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NavigationGlimpse
 {
     public class Canvas
     {
-        private const int StateElementWidth = 150;
-        private const int WidthBetweenPoints = 10;
+        private const int Top = 10;
+        private const int Left = 10;
+        private const int StateWidth = 150;
+        private const int StateHeight = 50;
+        private const int StateSeparation = 40;
+        private const int TransitionSeparation = 20;
 
-        public static List<TransitionElement> Arrange()
+        public static Tuple<List<StateElement>, List<TransitionElement>> Arrange()
         {
             var transitionElements = new List<TransitionElement>();
+            var stateElements = new List<StateElement>();
+            var stateX = Left;
+            var stateY = Top;
             foreach (Dialog dialog in StateInfoConfig.Dialogs)
             {
                 var spacesFilled = new Dictionary<int, HashSet<int>>();
@@ -26,16 +31,22 @@ namespace NavigationGlimpse
                 }
                 foreach (State state in dialog.States)
                 {
+                    var stateElement = new StateElement(state);
+                    stateElements.Add(stateElement);
+                    stateElement.X = stateX;
+                    stateElement.Y = stateY;
                     trans = TransByState(state, transitionElements);
-                    var start = (StateElementWidth - (trans.Count() - 1) * WidthBetweenPoints) / 2;
+                    var transWidth = (trans.Count() - 1) * TransitionSeparation;
+                    var start = stateElement.X + (StateWidth - transWidth) / 2;
                     foreach (var p in trans)
                     {
                         p.SetCoords(state, start);
-                        start += WidthBetweenPoints;
+                        start += TransitionSeparation;
                     }
+                    stateX += StateSeparation;
                 }
             }
-            return transitionElements;
+            return new Tuple<List<StateElement>,List<TransitionElement>>(stateElements, transitionElements);
         }
 
         private static IEnumerable<TransitionElement> TransByDialog(Dialog dialog)

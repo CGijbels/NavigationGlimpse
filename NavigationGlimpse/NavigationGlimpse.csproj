@@ -50,6 +50,7 @@
     <Compile Include="NavigationTab.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScriptResource.cs" />
+    <Compile Include="StateElement.cs" />
     <Compile Include="TransitionElement.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -66,13 +66,13 @@ namespace NavigationGlimpse
             set;
         }
 
-        public int? X
+        public int? X1
         {
             get;
             set;
         }
 
-        public int? Y
+        public int? X2
         {
             get;
             set;
@@ -80,10 +80,10 @@ namespace NavigationGlimpse
 
         public void SetCoords(State state, int value)
         {
-            if (From == state && !X.HasValue)
-                X = value;
+            if (From == state && !X1.HasValue)
+                X1 = value;
             else
-                Y = value;
+                X2 = value;
         }
     }
 }
