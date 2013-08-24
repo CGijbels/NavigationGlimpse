@@ -8,6 +8,12 @@ namespace NavigationGlimpse.Test
     [TestClass]
     public class NavigationTabShould
     {
+        private static IEnumerable<StateElement> StateElements
+        {
+            get;
+            set;
+        }
+
         private static IEnumerable<TransitionElement> TransitionElements
         {
             get;
@@ -18,6 +24,7 @@ namespace NavigationGlimpse.Test
         public static void Initialize(TestContext testContext)
         {
             var elements = (Tuple<List<StateElement>,List<TransitionElement>>) new NavigationTab().GetData(null);
+            StateElements = elements.Item1;
             TransitionElements = elements.Item2;
         }
 
@@ -45,6 +52,24 @@ namespace NavigationGlimpse.Test
         public void SetX2To275ForSingleTransitionToState2()
         {
             Assert.AreEqual(275, GetTransition("D1.S1.T1").X2);
+        }
+
+        [TestMethod]
+        public void SetDepthTo0ForSingleSelfTransition()
+        {
+            Assert.AreEqual(0, GetTransition("D1.S3.T1").Depth);
+        }
+
+        [TestMethod]
+        public void SetX1To455ForSingleSelfTransitionFromState3()
+        {
+            Assert.AreEqual(455, GetTransition("D1.S3.T1").X1);
+        }
+
+        [TestMethod]
+        public void SetX2To475ForSingleSelfTransitionToState3()
+        {
+            Assert.AreEqual(475, GetTransition("D1.S3.T1").X2);
         }
     }
 }
