@@ -71,5 +71,12 @@ namespace NavigationGlimpse.Test
         {
             Assert.AreEqual(475, GetTransition("D1.S3.T1").X2);
         }
+
+        [TestMethod]
+        public void SetYTo60ForAllDialog1Transitions()
+        {
+            var trans = TransitionElements.Where(t => t.Transition.Parent.Parent.Key == "D1" && t.Y != 60);
+            Assert.AreEqual(0, trans.Count());
+        }
     }
 }

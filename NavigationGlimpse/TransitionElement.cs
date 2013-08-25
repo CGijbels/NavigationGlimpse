@@ -78,6 +78,12 @@ namespace NavigationGlimpse
             set;
         }
 
+        public int Y
+        {
+            get;
+            set;
+        }
+
         public void SetCoords(State state, int value)
         {
             if (From == state && !X1.HasValue)

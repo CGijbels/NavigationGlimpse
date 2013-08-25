@@ -38,9 +38,10 @@ namespace NavigationGlimpse
                     trans = TransByState(state, transitionElements);
                     var transWidth = (trans.Count() - 1) * TransitionSeparation;
                     var start = stateElement.X + (StateWidth - transWidth) / 2;
-                    foreach (var p in trans)
+                    foreach (var transEl in trans)
                     {
-                        p.SetCoords(state, start);
+                        transEl.Y = stateElement.Y + StateHeight;
+                        transEl.SetCoords(state, start);
                         start += TransitionSeparation;
                     }
                     stateX += StateWidth + StateSeparation;
