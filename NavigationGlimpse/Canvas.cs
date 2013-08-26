@@ -13,6 +13,7 @@ namespace NavigationGlimpse
         private const int StateHeight = 50;
         private const int StateSeparation = 40;
         private const int TransitionSeparation = 20;
+        private const int TransitionStepHeight = 20;
 
         public static Tuple<List<StateElement>, List<TransitionElement>> Arrange()
         {
@@ -35,12 +36,14 @@ namespace NavigationGlimpse
                     stateElements.Add(stateElement);
                     stateElement.X = stateX;
                     stateElement.Y = stateY;
+                    stateElement.H = StateHeight;
                     trans = TransByState(state, transitionElements);
                     var transWidth = (trans.Count() - 1) * TransitionSeparation;
                     var start = stateElement.X + (StateWidth - transWidth) / 2;
                     foreach (var transEl in trans)
                     {
                         transEl.Y = stateElement.Y + StateHeight;
+                        transEl.H = (transEl.Depth + 1) * TransitionStepHeight;
                         transEl.SetCoords(state, start);
                         start += TransitionSeparation;
                     }

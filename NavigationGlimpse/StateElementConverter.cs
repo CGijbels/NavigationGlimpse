@@ -10,7 +10,8 @@ namespace NavigationGlimpse
             {
                 stateEl.State.Key,
                 stateEl.X,
-                stateEl.Y
+                stateEl.Y,
+                stateEl.H
             };
         }
     }

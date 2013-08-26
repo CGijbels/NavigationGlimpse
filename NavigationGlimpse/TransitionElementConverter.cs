@@ -10,7 +10,9 @@ namespace NavigationGlimpse
             {
                 transEl.Transition.Key,
                 transEl.X1,
-                transEl.X2
+                transEl.X2,
+                transEl.Y,
+                transEl.H
             };
         }
     }

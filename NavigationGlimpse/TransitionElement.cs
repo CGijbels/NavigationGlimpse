@@ -32,7 +32,7 @@ namespace NavigationGlimpse
             private set;
         }
 
-        public State From
+        internal State From
         {
             get
             {
@@ -40,7 +40,7 @@ namespace NavigationGlimpse
             }
         }
 
-        public State To
+        internal State To
         {
             get
             {
@@ -48,19 +48,19 @@ namespace NavigationGlimpse
             }
         }
 
-        public int A
+        internal int A
         { 
             get;
             set;
         }
 
-        public int B
+        internal int B
         {
             get;
             set;
         }
 
-        public int Depth
+        internal int Depth
         {
             get;
             set;
@@ -84,7 +84,13 @@ namespace NavigationGlimpse
             set;
         }
 
-        public void SetCoords(State state, int value)
+        public int H
+        {
+            get;
+            set;
+        }
+
+        internal void SetCoords(State state, int value)
         {
             if (From == state && !X1.HasValue)
                 X1 = value;

@@ -2,6 +2,7 @@
 using System.Linq;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
+using Navigation;
 
 namespace NavigationGlimpse.Test
 {
@@ -44,6 +45,25 @@ namespace NavigationGlimpse.Test
         }
 
         [TestMethod]
+        public void ReturnAllStates()
+        {
+            var q = from d in StateInfoConfig.Dialogs
+                    from s in d.States
+                    select s;
+            Assert.AreEqual(q.Count(), StateElements.Count());
+        }
+
+        [TestMethod]
+        public void ReturnAllTransitions()
+        {
+            var q = from d in StateInfoConfig.Dialogs
+                    from s in d.States
+                    from t in s.Transitions
+                    select t;
+            Assert.AreEqual(q.Count(), TransitionElements.Count());
+        }
+
+        [TestMethod]
         public void SetXTo10ForState1()
         {
             Assert.AreEqual(10, GetState("D1.S1").X);
@@ -69,9 +89,16 @@ namespace NavigationGlimpse.Test
         }
 
         [TestMethod]
-        public void SetDepthTo0ForSingleTransition()
+        public void SetHTo50ForAllDialog1States()
         {
-            Assert.AreEqual(0, GetTransition("D1.S1.T1").Depth);
+            var states = StateElements.Where(s => s.State.Parent.Key == "D1" && s.H != 50);
+            Assert.AreEqual(0, states.Count());
+        }
+
+        [TestMethod]
+        public void SetHTo20ForSingleTransition()
+        {
+            Assert.AreEqual(20, GetTransition("D1.S1.T1").H);
         }
 
         [TestMethod]
@@ -87,9 +114,9 @@ namespace NavigationGlimpse.Test
         }
 
         [TestMethod]
-        public void SetDepthTo0ForSingleSelfTransition()
+        public void SetHTo20ForSingleSelfTransition()
         {
-            Assert.AreEqual(0, GetTransition("D1.S3.T1").Depth);
+            Assert.AreEqual(20, GetTransition("D1.S3.T1").H);
         }
 
         [TestMethod]
