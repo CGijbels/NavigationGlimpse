@@ -11,6 +11,7 @@ namespace NavigationGlimpse
                 stateEl.State.Key,
                 stateEl.X,
                 stateEl.Y,
+                stateEl.W,
                 stateEl.H
             };
         }

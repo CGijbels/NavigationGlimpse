@@ -3,7 +3,7 @@
 
     (function () {
         var setup = function () {
-            navigation.scope.html('<canvas id="navigation-glimpse"></canvas>');
+            navigation.scope.html('<canvas id="navigation-glimpse" width="800px" height="400px"></canvas>');
             navigation.canvas = $('#navigation-glimpse')[0];
             navigation.canvas.context = navigation.canvas.getContext("2d");
         };
@@ -12,6 +12,19 @@
 
     (function(){
         var render = function () {
+            var context = navigation.canvas.context;
+            for (var i = 0; i < navigation.states.length; i++) {
+                var state = navigation.states[i];
+                context.rect(state.x, state.y, state.w, state.h);
+            }
+            for (var i = 0; i < navigation.transitions.length; i++) {
+                var transition = navigation.transitions[i];
+                context.moveTo(transition.x1, transition.y);
+                context.lineTo(transition.x1, transition.y + transition.h);
+                context.lineTo(transition.x2, transition.y + transition.h);
+                context.lineTo(transition.x2, transition.y);
+            }
+            context.stroke();
         };
         pubsub.subscribe('trigger.navigation.event.render', render);
     })();
@@ -27,6 +40,8 @@
         },
         postrender = function (args) {
             navigation.data = args.pluginData._data;
+            navigation.states = navigation.data.item1;
+            navigation.transitions = navigation.data.item2;
             navigation.scope = args.panel;
             args.pluginData.data = 'Loading data, please wait...';
             pubsub.publishAsync('trigger.navigation.init');

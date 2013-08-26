@@ -89,6 +89,13 @@ namespace NavigationGlimpse.Test
         }
 
         [TestMethod]
+        public void SetWTo150ForAllDialog1States()
+        {
+            var states = StateElements.Where(s => s.State.Parent.Key == "D1" && s.W != 150);
+            Assert.AreEqual(0, states.Count());
+        }
+
+        [TestMethod]
         public void SetHTo50ForAllDialog1States()
         {
             var states = StateElements.Where(s => s.State.Parent.Key == "D1" && s.H != 50);

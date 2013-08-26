@@ -32,6 +32,12 @@ namespace NavigationGlimpse
             set;
         }
 
+        public int W
+        {
+            get;
+            set;
+        }
+
         public int H
         {
             get;
