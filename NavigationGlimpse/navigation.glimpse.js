@@ -15,14 +15,23 @@
             var context = navigation.canvas.context;
             for (var i = 0; i < navigation.states.length; i++) {
                 var state = navigation.states[i];
+                context.fillStyle = '#fff';
                 context.rect(state.x, state.y, state.w, state.h);
+                context.fillStyle = '#000';
+                context.font = 'bold 12px Consolas,Courier New';
+                var shift = Math.max(0, (state.w - context.measureText(state.key).width) / 2);
+                context.fillText(state.key, state.x + shift, state.y + 30, state.w - 2);
             }
+            context.fillStyle = '#000';
+            context.font = 'italic 12px Consolas,Courier New';
             for (var i = 0; i < navigation.transitions.length; i++) {
                 var transition = navigation.transitions[i];
                 context.moveTo(transition.x1, transition.y);
                 context.lineTo(transition.x1, transition.y + transition.h);
                 context.lineTo(transition.x2, transition.y + transition.h);
                 context.lineTo(transition.x2, transition.y);
+                var shift = (transition.x2 - transition.x1 - context.measureText(transition.key).width) / 2;
+                context.fillText(transition.key, transition.x1 + shift, transition.y + transition.h + 12);
             }
             context.stroke();
         };
