@@ -33,6 +33,9 @@
                 context.lineTo(transition.x2, transition.y);
                 var shift = (transition.x2 - transition.x1 - context.measureText(transition.key).width) / 2;
                 context.fillText(transition.key, transition.x1 + shift, transition.y + transition.h + 12);
+                context.moveTo(transition.x2 - 5, transition.y + 10);
+                context.lineTo(transition.x2, transition.y);
+                context.lineTo(transition.x2 + 5, transition.y + 10);
             }
             context.stroke();
         };
