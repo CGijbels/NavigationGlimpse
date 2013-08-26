@@ -15,7 +15,7 @@
             var fontFamily = '"Segoe UI Light","Segoe UI Web Regular","Segoe UI","Helvetica Neue",Helvetica,Arial';
             var context = navigation.canvas.context;
             context.save();
-            context.fillStyle = 'white';
+            context.fillStyle = '#fff';
             context.shadowOffsetX = 2;
             context.shadowOffsetY = 2;
             context.shadowBlur = 10;
