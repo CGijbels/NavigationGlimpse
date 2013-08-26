@@ -24,7 +24,6 @@
                 var shift = Math.max(0, (state.w - context.measureText(state.key).width) / 2);
                 context.fillText(state.key, state.x + shift, state.y + 30, state.w - 2);
             }
-            context.fillStyle = '#000';
             context.font = 'italic 12px Consolas,Courier New';
             for (var i = 0; i < navigation.transitions.length; i++) {
                 var transition = navigation.transitions[i];
