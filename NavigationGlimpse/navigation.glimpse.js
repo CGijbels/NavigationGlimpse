@@ -12,7 +12,7 @@
 
     (function(){
         var render = function () {
-            var fontFamily = '"Segoe UI Light","Segoe UI Web Regular","Segoe UI","Helvetica Neue",Helvetica,Arial';
+            var font = '12px "Segoe UI Light","Segoe UI Web Regular","Segoe UI","Helvetica Neue",Helvetica,Arial';
             var context = navigation.canvas.context;
             context.save();
             context.fillStyle = '#fff';
@@ -27,13 +27,13 @@
             }
             context.restore();
             context.fillStyle = '#000';
-            context.font = 'bold 12px ' + fontFamily;
+            context.font = 'bold ' + font;
             for (var i = 0; i < navigation.states.length; i++) {
                 var state = navigation.states[i];
                 var shift = Math.max(0, (state.w - context.measureText(state.key).width) / 2);
                 context.fillText(state.key, state.x + shift, state.y + 30, state.w - 2);
             }
-            context.font = '12px ' + fontFamily;
+            context.font = font;
             for (var i = 0; i < navigation.transitions.length; i++) {
                 var transition = navigation.transitions[i];
                 context.moveTo(transition.x1, transition.y);
