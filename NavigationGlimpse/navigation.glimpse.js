@@ -33,7 +33,7 @@
                 var shift = Math.max(0, (state.w - context.measureText(state.key).width) / 2);
                 context.fillText(state.key, state.x + shift, state.y + 30, state.w - 2);
             }
-            context.font = 'italic 12px ' + fontFamily;
+            context.font = '12px ' + fontFamily;
             for (var i = 0; i < navigation.transitions.length; i++) {
                 var transition = navigation.transitions[i];
                 context.moveTo(transition.x1, transition.y);
