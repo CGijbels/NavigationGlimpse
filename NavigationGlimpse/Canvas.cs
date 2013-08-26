@@ -14,6 +14,7 @@ namespace NavigationGlimpse
         private const int StateSeparation = 40;
         private const int TransitionSeparation = 20;
         private const int TransitionStepHeight = 20;
+        private const int DialogSeparation = 20;
 
         public static Tuple<List<StateElement>, List<TransitionElement>> Arrange()
         {
@@ -23,6 +24,7 @@ namespace NavigationGlimpse
             var stateY = Top;
             foreach (Dialog dialog in StateInfoConfig.Dialogs)
             {
+                stateX = Left;
                 var spacesFilled = new Dictionary<int, HashSet<int>>();
                 var trans = TransByDialog(dialog);
                 foreach (var transitionElement in trans)
@@ -50,6 +52,7 @@ namespace NavigationGlimpse
                     }
                     stateX += StateWidth + StateSeparation;
                 }
+                stateY += Top + StateHeight + spacesFilled.Count * TransitionStepHeight + DialogSeparation;
             }
             return new Tuple<List<StateElement>,List<TransitionElement>>(stateElements, transitionElements);
         }
