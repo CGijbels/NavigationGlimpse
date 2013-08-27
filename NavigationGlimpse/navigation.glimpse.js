@@ -15,6 +15,7 @@
             var font = '12px "Segoe UI Light","Segoe UI Web Regular","Segoe UI","Helvetica Neue",Helvetica,Arial';
             var context = navigation.canvas.context;
             context.save();
+            context.beginPath();
             context.fillStyle = '#fff';
             context.shadowOffsetX = 2;
             context.shadowOffsetY = 2;
@@ -23,8 +24,8 @@
             for (var i = 0; i < navigation.states.length; i++) {
                 var state = navigation.states[i];
                 context.rect(state.x, state.y, state.w, state.h);
-                context.fillRect(state.x, state.y, state.w, state.h);
             }
+            context.fill();
             context.restore();
             context.font = 'bold ' + font;
             for (var i = 0; i < navigation.states.length; i++) {
