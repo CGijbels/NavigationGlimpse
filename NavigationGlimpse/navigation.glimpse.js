@@ -3,57 +3,79 @@
 
     (function () {
         var setup = function () {
-            navigation.scope.html('<canvas id="navigation-glimpse" width="800px" height="400px"></canvas>');
+            navigation.scope.html('<canvas id="navigation-glimpse"></canvas>');
             navigation.canvas = $('#navigation-glimpse')[0];
+            navigation.canvas.width = 800;
+            navigation.canvas.height = 400;
             navigation.canvas.context = navigation.canvas.getContext("2d");
+            navigation.font = '12px "Segoe UI Light","Segoe UI Web Regular","Segoe UI","Helvetica Neue",Helvetica,Arial';
+            navigation.x = 0;
+            navigation.y = 0;
         };
         pubsub.subscribe('trigger.navigation.shell.init', setup);
     })();
 
-    (function(){
-        var render = function () {
-            var font = '12px "Segoe UI Light","Segoe UI Web Regular","Segoe UI","Helvetica Neue",Helvetica,Arial';
-            var context = navigation.canvas.context;
-            context.save();
-            context.beginPath();
-            context.fillStyle = '#fff';
-            context.shadowOffsetX = 2;
-            context.shadowOffsetY = 2;
-            context.shadowBlur = 10;
-            context.shadowColor = '#999';
-            for (var i = 0; i < navigation.states.length; i++) {
-                var state = navigation.states[i];
-                context.rect(state.x, state.y, state.w, state.h);
-            }
-            context.fill();
-            context.restore();
-            context.font = 'bold ' + font;
-            for (var i = 0; i < navigation.states.length; i++) {
-                var state = navigation.states[i];
-                var shift = Math.max(0, (state.w - context.measureText(state.key).width) / 2);
-                context.fillText(state.key, state.x + shift, state.y + 30, state.w - 2);
-            }
-            context.font = font;
-            for (var i = 0; i < navigation.transitions.length; i++) {
-                var transition = navigation.transitions[i];
-                context.moveTo(transition.x1, transition.y);
-                context.lineTo(transition.x1, transition.y + transition.h);
-                context.lineTo(transition.x2, transition.y + transition.h);
-                context.lineTo(transition.x2, transition.y);
-                var shift = (transition.x2 - transition.x1 - context.measureText(transition.key).width) / 2;
-                context.fillText(transition.key, transition.x1 + shift, transition.y + transition.h + 12);
-                context.moveTo(transition.x2 - 5, transition.y + 10);
-                context.lineTo(transition.x2, transition.y);
-                context.lineTo(transition.x2 + 5, transition.y + 10);
-            }
-            context.stroke();
-        };
+    (function () {
+        var wireListeners = function () {
+                $(navigation.scope).delegate('#navigation-glimpse', 'click', function (e) {
+                    navigation.x = e.offsetX;
+                    navigation.y = e.offsetY;
+                    render();
+                });
+            },
+            render = function () {
+                navigation.canvas.context.clearRect(0, 0, navigation.canvas.width, navigation.canvas.height);
+                processStates(navigation.canvas.context, navigation.states);
+                processStateText(navigation.canvas.context, navigation.states, navigation.font);
+                processTransitions(navigation.canvas.context, navigation.transitions, navigation.font);
+            },
+            processStates = function (context, states) {
+                context.save();
+                context.beginPath();
+                context.fillStyle = '#fff';
+                context.shadowOffsetX = 2;
+                context.shadowOffsetY = 2;
+                context.shadowBlur = 10;
+                context.shadowColor = '#999';
+                for (var i = 0; i < states.length; i++) {
+                    var state = states[i];
+                    context.rect(state.x, state.y, state.w, state.h);
+                }
+                context.fill();
+                context.restore();
+            },
+            processStateText = function (context, states, font) {
+                context.font = 'bold ' + font;
+                for (var i = 0; i < states.length; i++) {
+                    var state = states[i];
+                    var shift = Math.max(0, (state.w - context.measureText(state.key).width) / 2);
+                    context.fillText(state.key, state.x + shift, state.y + 30, state.w - 2);
+                }
+            },
+            processTransitions = function (context, transitions, font) {
+                context.font = font;
+                for (var i = 0; i < transitions.length; i++) {
+                    var transition = transitions[i];
+                    context.moveTo(transition.x1, transition.y);
+                    context.lineTo(transition.x1, transition.y + transition.h);
+                    context.lineTo(transition.x2, transition.y + transition.h);
+                    context.lineTo(transition.x2, transition.y);
+                    var shift = (transition.x2 - transition.x1 - context.measureText(transition.key).width) / 2;
+                    context.fillText(transition.key, transition.x1 + shift, transition.y + transition.h + 12);
+                    context.moveTo(transition.x2 - 5, transition.y + 10);
+                    context.lineTo(transition.x2, transition.y);
+                    context.lineTo(transition.x2 + 5, transition.y + 10);
+                }
+                context.stroke();
+            };
+        pubsub.subscribe('trigger.navigation.shell.subscriptions', wireListeners);
         pubsub.subscribe('trigger.navigation.event.render', render);
     })();
 
     (function () {
         var init = function () {
             pubsub.publish('trigger.navigation.shell.init');
+            pubsub.publish('trigger.navigation.shell.subscriptions');
             pubsub.publish('trigger.navigation.event.render');
         },
         prerender = function (args) {
