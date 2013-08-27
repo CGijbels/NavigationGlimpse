@@ -23,10 +23,9 @@
             for (var i = 0; i < navigation.states.length; i++) {
                 var state = navigation.states[i];
                 context.rect(state.x, state.y, state.w, state.h);
-                context.fill();
+                context.fillRect(state.x, state.y, state.w, state.h);
             }
             context.restore();
-            context.fillStyle = '#000';
             context.font = 'bold ' + font;
             for (var i = 0; i < navigation.states.length; i++) {
                 var state = navigation.states[i];
