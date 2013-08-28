@@ -8,9 +8,7 @@
             navigation.canvas.width = 800;
             navigation.canvas.height = 400;
             navigation.canvas.context = navigation.canvas.getContext("2d");
-            navigation.font = '12px "Segoe UI Light","Segoe UI Web Regular","Segoe UI","Helvetica Neue",Helvetica,Arial';
-            navigation.x = 0;
-            navigation.y = 0;
+            navigation.font = '12px "Segoe UI Web Regular", "Segoe UI", "Helvetica Neue", Helvetica, Arial';
         };
         pubsub.subscribe('trigger.navigation.shell.init', setup);
     })();
@@ -18,42 +16,54 @@
     (function () {
         var wireListeners = function () {
                 navigation.scope.delegate('#navigation-glimpse', 'click', function (e) {
-                    navigation.x = e.offsetX;
-                    navigation.y = e.offsetY;
+                    update(navigation.states, e.offsetX, e.offsetY);
                     render();
                 });
             },
+            update = function (states, x, y) {
+                var oldSelection,
+                    newSelection = null;
+                for (var i = 0; i < states.length; i++) {
+                    var state = states[i];
+                    if (state.selected)
+                        oldSelection = state;
+                    if (state.x <= x && x <= state.x + state.w && state.y <= y && y <= state.y + state.h) {
+                        state.selected = true;
+                        newSelection = state;
+                    }
+                }
+                if (newSelection && oldSelection && oldSelection !== newSelection)
+                    oldSelection.selected = false;
+            },
             render = function () {
                 navigation.canvas.context.clearRect(0, 0, navigation.canvas.width, navigation.canvas.height);
-                processStates(navigation.canvas.context, navigation.states);
-                processStateText(navigation.canvas.context, navigation.states, navigation.font);
+                processStates(navigation.canvas.context, navigation.states, navigation.font);
                 processTransitions(navigation.canvas.context, navigation.transitions, navigation.font);
             },
-            processStates = function (context, states) {
-                context.save();
-                context.beginPath();
-                context.fillStyle = '#fff';
-                context.shadowOffsetX = 2;
-                context.shadowOffsetY = 2;
-                context.shadowBlur = 10;
-                context.shadowColor = '#999';
+            processStates = function (context, states, font) {
                 for (var i = 0; i < states.length; i++) {
                     var state = states[i];
+                    context.save();
+                    context.fillStyle = '#fff';
+                    if (state.selected)
+                        context.fillStyle = '#e6f5e6';
+                    context.shadowOffsetX = 2;
+                    context.shadowOffsetY = 2;
+                    context.shadowBlur = 10;
+                    context.shadowColor = '#999';
+                    context.beginPath();
                     context.rect(state.x, state.y, state.w, state.h);
-                }
-                context.fill();
-                context.restore();
-            },
-            processStateText = function (context, states, font) {
-                context.font = 'bold ' + font;
-                for (var i = 0; i < states.length; i++) {
-                    var state = states[i];
+                    context.fill();
+                    context.restore();
+                    context.stroke();
+                    context.font = font;
                     var shift = Math.max(0, (state.w - context.measureText(state.key).width) / 2);
                     context.fillText(state.key, state.x + shift, state.y + 30, state.w - 2);
                 }
             },
             processTransitions = function (context, transitions, font) {
-                context.font = font;
+                context.font = 'italic ' + font;
+                context.beginPath();
                 for (var i = 0; i < transitions.length; i++) {
                     var transition = transitions[i];
                     context.moveTo(transition.x1, transition.y);
