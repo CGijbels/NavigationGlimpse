@@ -7,7 +7,7 @@
             navigation.canvas = $('#navigation-glimpse')[0];
             navigation.canvas.width = 800;
             navigation.canvas.height = 400;
-            navigation.canvas.context = navigation.canvas.getContext("2d");
+            navigation.canvas.context = navigation.canvas.getContext('2d');
             navigation.font = '12px "Segoe UI Web Regular", "Segoe UI", "Helvetica Neue", Helvetica, Arial';
         };
         pubsub.subscribe('trigger.navigation.shell.init', setup);
