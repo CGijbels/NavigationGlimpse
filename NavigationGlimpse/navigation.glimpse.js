@@ -17,7 +17,7 @@
 
     (function () {
         var wireListeners = function () {
-                $(navigation.scope).delegate('#navigation-glimpse', 'click', function (e) {
+                navigation.scope.delegate('#navigation-glimpse', 'click', function (e) {
                     navigation.x = e.offsetX;
                     navigation.y = e.offsetY;
                     render();
