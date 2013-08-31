@@ -48,16 +48,7 @@ namespace NavigationGlimpse
                         stateElement.Crumb = 0;
                     if (crumbs.ContainsKey(state))
                         stateElement.Crumb = -1 * crumbs.Count + crumbs[state];
-                    trans = TransByState(state, transitionElements);
-                    var transWidth = (trans.Count() - 1) * TransitionSeparation;
-                    var start = stateElement.X + (StateWidth - transWidth) / 2;
-                    foreach (var transEl in trans)
-                    {
-                        transEl.Y = stateElement.Y + StateHeight;
-                        transEl.H = (transEl.Depth + 1) * TransitionStepHeight;
-                        transEl.SetCoords(state, start);
-                        start += TransitionSeparation;
-                    }
+                    ProcessTransitions(stateElement, transitionElements);
                     stateX += StateWidth + StateSeparation;
                 }
                 stateY += Top + StateHeight + spacesFilled.Count * TransitionStepHeight + DialogSeparation;
@@ -88,6 +79,20 @@ namespace NavigationGlimpse
             if (!spacesFilled.ContainsKey(transEl.Depth))
                 spacesFilled[transEl.Depth] = new HashSet<int>();
             spacesFilled[transEl.Depth].UnionWith(Enumerable.Range(transEl.A, transEl.B - transEl.A));
+        }
+
+        private static void ProcessTransitions(StateElement stateElement, List<TransitionElement> transEls)
+        {
+            var trans = TransByState(stateElement.State, transEls);
+            var transWidth = (trans.Count() - 1) * TransitionSeparation;
+            var start = stateElement.X + (StateWidth - transWidth) / 2;
+            foreach (var transEl in trans)
+            {
+                transEl.Y = stateElement.Y + StateHeight;
+                transEl.H = (transEl.Depth + 1) * TransitionStepHeight;
+                transEl.SetCoords(stateElement.State, start);
+                start += TransitionSeparation;
+            }
         }
 
         private static IEnumerable<TransitionElement> TransByState(State state, List<TransitionElement> transEls)
