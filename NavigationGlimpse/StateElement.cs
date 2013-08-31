@@ -24,8 +24,10 @@ namespace NavigationGlimpse
 
         public int H { get; set; }
 
+        public bool Current { get; set; }
+
         public bool Previous { get; set; }
 
-        public int Crumb { get; set; }
+        public int Back { get; set; }
     }
 }

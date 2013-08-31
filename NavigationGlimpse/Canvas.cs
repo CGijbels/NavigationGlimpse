@@ -36,12 +36,11 @@ namespace NavigationGlimpse
                     stateElement.Y = stateY;
                     stateElement.W = StateWidth;
                     stateElement.H = StateHeight;
+                    stateElement.Current = state == StateContext.State;
                     stateElement.Previous = state == StateContext.PreviousState;
-                    stateElement.Crumb = 1;
-                    if (state == StateContext.State)
-                        stateElement.Crumb = 0;
+                    stateElement.Back = 0;
                     if (crumbs.ContainsKey(state))
-                        stateElement.Crumb = -1 * crumbs.Count + crumbs[state];
+                        stateElement.Back = crumbs.Count - crumbs[state];
                     ProcessTransitions(stateElement, transitionElements);
                     stateX += StateWidth + StateSeparation;
                 }

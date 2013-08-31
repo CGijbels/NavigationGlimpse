@@ -13,9 +13,10 @@ namespace NavigationGlimpse
                 stateEl.Y,
                 stateEl.W,
                 stateEl.H,
+                stateEl.Current,
                 stateEl.Previous,
-                stateEl.Crumb,
-                Selected = stateEl.Crumb == 0
+                stateEl.Back,
+                Selected = stateEl.Current
             };
         }
     }

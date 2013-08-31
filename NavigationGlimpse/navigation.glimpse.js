@@ -8,7 +8,7 @@
             navigation.canvas.width = 800;
             navigation.canvas.height = 400;
             navigation.canvas.context = navigation.canvas.getContext('2d');
-            navigation.font = '12px "Segoe UI Web Regular", "Segoe UI", "Helvetica Neue", Helvetica, Arial';
+            navigation.font = '"Segoe UI Web Regular", "Segoe UI", "Helvetica Neue", Helvetica, Arial';
         };
         pubsub.subscribe('trigger.navigation.shell.init', setup);
     })();
@@ -56,16 +56,22 @@
                     context.fill();
                     context.restore();
                     context.stroke();
-                    context.font = font;
+                    context.font = 'bold 12px ' + font;
                     context.textAlign = 'center';
                     context.fillText(state.key, state.x + state.w / 2, state.y + 30, state.w - 2);
+                    context.textAlign = 'left';
+                    context.font = '10px ' + font;
+                    if (state.previous)
+                        context.fillText('previous', state.x + 5, state.y + 12);
                     context.textAlign = 'right';
-                    if (state.crumb <= 0)
-                        context.fillText(state.crumb, state.x + state.w - 5, state.y + 15);
+                    if (state.current)
+                        context.fillText('current', state.x + state.w - 5, state.y + 12);
+                    if (state.back > 0)
+                        context.fillText('back ' + state.back, state.x + state.w - 5, state.y + 12);
                 }
             },
             processTransitions = function (context, transitions, font) {
-                context.font = 'italic ' + font;
+                context.font = 'italic 12px ' + font;
                 context.beginPath();
                 for (var i = 0; i < transitions.length; i++) {
                     var transition = transitions[i];
