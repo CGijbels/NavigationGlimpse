@@ -22,6 +22,8 @@ namespace NavigationGlimpse
             var stateElements = new List<StateElement>();
             var stateX = Left;
             var stateY = Top;
+            var crumbs = StateController.Crumbs.Select((c, i) => new { Crumb = c, Index = i })
+                .ToDictionary(c => c.Crumb.State, c => c.Index);
             foreach (Dialog dialog in StateInfoConfig.Dialogs)
             {
                 stateX = Left;
@@ -40,6 +42,12 @@ namespace NavigationGlimpse
                     stateElement.Y = stateY;
                     stateElement.W = StateWidth;
                     stateElement.H = StateHeight;
+                    stateElement.Previous = state == StateContext.PreviousState;
+                    stateElement.Crumb = 1;
+                    if (state == StateContext.State)
+                        stateElement.Crumb = 0;
+                    if (crumbs.ContainsKey(state))
+                        stateElement.Crumb = -1 * crumbs.Count + crumbs[state];
                     trans = TransByState(state, transitionElements);
                     var transWidth = (trans.Count() - 1) * TransitionSeparation;
                     var start = stateElement.X + (StateWidth - transWidth) / 2;

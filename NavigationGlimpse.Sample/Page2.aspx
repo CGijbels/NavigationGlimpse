@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Page1.aspx.cs" Inherits="NavigationGlimpse.Sample.Page1" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Page2.aspx.cs" Inherits="NavigationGlimpse.Sample.Page2" %>
 <%@ Register assembly="Navigation" namespace="Navigation" tagprefix="nav" %>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -8,8 +8,7 @@
 <body>
     <form id="form1" runat="server">
     <div>
-		<asp:HyperLink runat="server" NavigateUrl="{RefreshLink Sort}" Text="Sort" />
-		<asp:HyperLink runat="server" NavigateUrl="{NavigationLink Next}" Text="Next" />
+		<asp:HyperLink runat="server" NavigateUrl="{NavigationBackLink 1}" Text="Back" />    
 		<asp:Button runat="server" Text="Submit" />
     </div>
     </form>

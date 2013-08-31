@@ -26,11 +26,21 @@ namespace NavigationGlimpse
             Transition = trans;
         }
 
-        public Transition Transition
-        {
-            get;
-            private set;
-        }
+        public Transition Transition { get; private set; }
+
+        internal int A { get; set; }
+
+        internal int B { get; set; }
+
+        internal int Depth { get; set; }
+
+        public int? X1 { get; set; }
+
+        public int? X2 { get; set; }
+
+        public int Y { get; set; }
+
+        public int H { get; set; }
 
         internal State From
         {
@@ -46,48 +56,6 @@ namespace NavigationGlimpse
             {
                 return Transition.To;
             }
-        }
-
-        internal int A
-        { 
-            get;
-            set;
-        }
-
-        internal int B
-        {
-            get;
-            set;
-        }
-
-        internal int Depth
-        {
-            get;
-            set;
-        }
-
-        public int? X1
-        {
-            get;
-            set;
-        }
-
-        public int? X2
-        {
-            get;
-            set;
-        }
-
-        public int Y
-        {
-            get;
-            set;
-        }
-
-        public int H
-        {
-            get;
-            set;
         }
 
         internal void SetCoords(State state, int value)

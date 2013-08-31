@@ -14,34 +14,18 @@ namespace NavigationGlimpse
             State = state;
         }
 
-        public State State
-        {
-            get;
-            private set;
-        }
+        public State State { get; private set; }
 
-        public int X
-        {
-            get;
-            set;
-        }
+        public int X { get; set; }
 
-        public int Y
-        {
-            get;
-            set;
-        }
+        public int Y { get; set; }
 
-        public int W
-        {
-            get;
-            set;
-        }
+        public int W { get; set; }
 
-        public int H
-        {
-            get;
-            set;
-        }
+        public int H { get; set; }
+
+        public bool Previous { get; set; }
+
+        public int Crumb { get; set; }
     }
 }
