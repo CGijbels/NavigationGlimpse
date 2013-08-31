@@ -8,8 +8,10 @@
 <body>
     <form id="form1" runat="server">
     <div>
-		<asp:HyperLink runat="server" NavigateUrl="{RefreshLink Sort}" Text="Sort" />
+		<asp:HyperLink runat="server" NavigateUrl="{RefreshLink}" Text="Refresh" />
 		<asp:HyperLink runat="server" NavigateUrl="{NavigationLink Next}" Text="Next" />
+		<asp:HyperLink runat="server" NavigateUrl="{NavigationLink Sample}" Text="Sample" />
+		<asp:HyperLink runat="server" NavigateUrl="{NavigationLink Sample2}" Text="Sample2" />
 		<asp:Button runat="server" Text="Submit" />
     </div>
     </form>
