@@ -57,8 +57,11 @@
                     context.restore();
                     context.stroke();
                     context.font = font;
-                    var shift = Math.max(0, (state.w - context.measureText(state.key).width) / 2);
-                    context.fillText(state.key, state.x + shift, state.y + 30, state.w - 2);
+                    context.textAlign = 'center';
+                    context.fillText(state.key, state.x + state.w / 2, state.y + 30, state.w - 2);
+                    context.textAlign = 'right';
+                    if (state.crumb <= 0)
+                        context.fillText(state.crumb, state.x + state.w - 5, state.y + 15);
                 }
             },
             processTransitions = function (context, transitions, font) {
@@ -70,8 +73,9 @@
                     context.lineTo(transition.x1, transition.y + transition.h);
                     context.lineTo(transition.x2, transition.y + transition.h);
                     context.lineTo(transition.x2, transition.y);
-                    var shift = (transition.x2 - transition.x1 - context.measureText(transition.key).width) / 2;
-                    context.fillText(transition.key, transition.x1 + shift, transition.y + transition.h + 12);
+                    context.textAlign = 'center';
+                    context.fillText(transition.key, transition.x1 + (transition.x2 - transition.x1) / 2,
+                        transition.y + transition.h + 12);
                     context.moveTo(transition.x2 - 5, transition.y + 10);
                     context.lineTo(transition.x2, transition.y);
                     context.lineTo(transition.x2 + 5, transition.y + 10);
