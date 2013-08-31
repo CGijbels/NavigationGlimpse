@@ -27,13 +27,7 @@ namespace NavigationGlimpse
             foreach (Dialog dialog in StateInfoConfig.Dialogs)
             {
                 stateX = Left;
-                var spacesFilled = new Dictionary<int, HashSet<int>>();
-                var trans = TransByDialog(dialog);
-                foreach (var transitionElement in trans)
-                {
-                    transitionElements.Add(transitionElement);
-                    CalculateDepth(spacesFilled, transitionElement);
-                }
+                var depths = CalculateDepths(dialog, transitionElements);
                 foreach (State state in dialog.States)
                 {
                     var stateElement = new StateElement(state);
@@ -51,34 +45,41 @@ namespace NavigationGlimpse
                     ProcessTransitions(stateElement, transitionElements);
                     stateX += StateWidth + StateSeparation;
                 }
-                stateY += Top + StateHeight + spacesFilled.Count * TransitionStepHeight + DialogSeparation;
+                stateY += Top + StateHeight + depths.Count * TransitionStepHeight + DialogSeparation;
             }
             return new Tuple<List<StateElement>,List<TransitionElement>>(stateElements, transitionElements);
         }
 
-        private static IEnumerable<TransitionElement> TransByDialog(Dialog dialog)
+        private static Dictionary<int, HashSet<int>> CalculateDepths(Dialog dialog, List<TransitionElement> transEls)
         {
-            return from s in dialog.States
-                   from t in s.Transitions
-                   orderby Math.Abs(t.To.Index - t.Parent.Index)
-                   select new TransitionElement(t);
+            var depths = new Dictionary<int, HashSet<int>>();
+            var trans = from s in dialog.States
+                        from t in s.Transitions
+                        orderby Math.Abs(t.To.Index - t.Parent.Index)
+                        select new TransitionElement(t);
+            foreach (var transitionElement in trans)
+            {
+                transEls.Add(transitionElement);
+                CalculateDepth(depths, transitionElement);
+            }
+            return depths;
         }
 
-        private static void CalculateDepth(Dictionary<int, HashSet<int>> spacesFilled, TransitionElement transEl)
+        private static void CalculateDepth(Dictionary<int, HashSet<int>> depths, TransitionElement transEl)
         {
             var depthFound = false;
             var depth = 0;
             while (!depthFound)
             {
-                depthFound = !spacesFilled.ContainsKey(depth) ||
-                    !spacesFilled[depth].Any(d => transEl.A <= d && d < transEl.B);
+                depthFound = !depths.ContainsKey(depth) ||
+                    !depths[depth].Any(d => transEl.A <= d && d < transEl.B);
                 if (!depthFound)
                     depth++;
             }
             transEl.Depth = depth;
-            if (!spacesFilled.ContainsKey(transEl.Depth))
-                spacesFilled[transEl.Depth] = new HashSet<int>();
-            spacesFilled[transEl.Depth].UnionWith(Enumerable.Range(transEl.A, transEl.B - transEl.A));
+            if (!depths.ContainsKey(transEl.Depth))
+                depths[transEl.Depth] = new HashSet<int>();
+            depths[transEl.Depth].UnionWith(Enumerable.Range(transEl.A, transEl.B - transEl.A));
         }
 
         private static void ProcessTransitions(StateElement stateElement, List<TransitionElement> transEls)
