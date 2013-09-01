@@ -17,9 +17,9 @@
                 elements.theme = elements.scope.find('#navigation-theme');
                 elements.masters = elements.scope.find('#navigation-masters');
                 elements.mobilePage = elements.scope.find('#navigation-mobilePage');
+                elements.mobileRoute = elements.scope.find('#navigation-mobileRoute');
                 elements.mobileTheme = elements.scope.find('#navigation-mobileTheme');
                 elements.mobileMasters = elements.scope.find('#navigation-mobileMasters');
-                elements.mobileRoute = elements.scope.find('#navigation-mobileRoute');
             };
         pubsub.subscribe('action.navigation.shell.loaded', find);
         return elements;
@@ -43,9 +43,9 @@
                 + '<tr class="glimpse-row"><th scope="row">theme</th><td id="navigation-theme"></td></tr>'
                 + '<tr class="glimpse-row"><th scope="row">masters</th><td id="navigation-masters"></td></tr>'
                 + '<tr class="glimpse-row"><th scope="row">mobilePage</th><td id="navigation-mobilePage"></td></tr>'
+                + '<tr class="glimpse-row"><th scope="row">mobileRoute</th><td id="navigation-mobileRoute"></td></tr>'
                 + '<tr class="glimpse-row"><th scope="row">mobileTheme</th><td id="navigation-mobileTheme"></td></tr>'
                 + '<tr class="glimpse-row"><th scope="row">mobileMasters</th><td id="navigation-mobileMasters"></td></tr>'
-                + '<tr class="glimpse-row"><th scope="row">mobileRoute</th><td id="navigation-mobileRoute"></td></tr>'
                 + '</tbody></table></div></div></div>');
             navigation.canvas = $('#navigation-glimpse')[0];
             navigation.canvas.width = 750;
@@ -89,8 +89,10 @@
                     var state = states[i];
                     context.save();
                     context.fillStyle = '#fff';
-                    if (state.selected)
+                    if (state.selected) {
                         context.fillStyle = '#e6f5e6';
+                        processSelectedState(navigation.elements, state);
+                    }
                     context.shadowOffsetX = 2;
                     context.shadowOffsetY = 2;
                     context.shadowBlur = 10;
@@ -113,6 +115,11 @@
                     if (state.back > 0)
                         context.fillText('back ' + state.back, state.x + state.w - 5, state.y + 12);
                 }
+            },
+            processSelectedState = function (elements, state) {
+                elements.key.html(state.dialogKey + '-' + state.key);
+                elements.page.html(state.page);
+                elements.route.html(state.route);
             },
             processTransitions = function (context, transitions, font) {
                 context.font = 'italic 12px ' + font;

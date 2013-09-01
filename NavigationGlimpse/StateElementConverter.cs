@@ -16,7 +16,22 @@ namespace NavigationGlimpse
                 stateEl.Current,
                 stateEl.Previous,
                 stateEl.Back,
-                Selected = stateEl.Current
+                Selected = stateEl.Current,
+                DialogKey = stateEl.State.Parent.Key,
+                stateEl.State.Page,
+                stateEl.State.Title,
+                stateEl.State.Route,
+                stateEl.State.Defaults,
+                stateEl.State.DefaultTypes,
+                stateEl.State.Derived,
+                stateEl.State.TrackCrumbTrail,
+                stateEl.State.CheckPhysicalUrlAccess,
+                stateEl.State.Theme,
+                stateEl.State.Masters,
+                stateEl.State.MobilePage,
+                stateEl.State.MobileRoute,
+                stateEl.State.MobileTheme,
+                stateEl.State.MobileMasters
             };
         }
     }
