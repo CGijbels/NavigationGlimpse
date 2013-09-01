@@ -1,4 +1,7 @@
 ﻿using Glimpse.Core.Extensibility;
+using Navigation;
+using System;
+using System.Collections.Generic;
 
 namespace NavigationGlimpse
 {
@@ -21,8 +24,8 @@ namespace NavigationGlimpse
                 stateEl.State.Page,
                 stateEl.State.Title,
                 stateEl.State.Route,
-                stateEl.State.Defaults,
-                stateEl.State.DefaultTypes,
+                Defaults = GetDictionary<object>(stateEl.State.Defaults),
+                DefaultTypes = GetDictionary<Type>(stateEl.State.DefaultTypes),
                 stateEl.State.Derived,
                 stateEl.State.TrackCrumbTrail,
                 stateEl.State.CheckPhysicalUrlAccess,
@@ -33,6 +36,14 @@ namespace NavigationGlimpse
                 stateEl.State.MobileTheme,
                 stateEl.State.MobileMasters
             };
+        }
+
+        private Dictionary<string, object> GetDictionary<T>(StateInfoCollection<T> coll)
+        {
+            var dictionary = new Dictionary<string, object>();
+            foreach (string key in coll.Keys)
+                dictionary[key] = coll[key];
+            return dictionary;
         }
     }
 }

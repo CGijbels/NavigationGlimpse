@@ -39,7 +39,7 @@
                 + '<tr class="glimpse-row"><th scope="row">defaultTypes</th><td id="navigation-defaultTypes"></td></tr>'
                 + '<tr class="glimpse-row"><th scope="row">derived</th><td id="navigation-derived"></td></tr>'
                 + '<tr class="glimpse-row"><th scope="row">trackCrumbTrail</th><td id="navigation-trackCrumbTrail"></td></tr>'
-                + '<tr class="glimpse-row"><th scope="row">checkPhysicalUrlAccess</th><td id="navigation-checkPhysicalUrlAccess"></td></tr>'
+                + '<tr class="glimpse-row"><th scope="row">checkPhysical UrlAccess</th><td id="navigation-checkPhysicalUrlAccess"></td></tr>'
                 + '<tr class="glimpse-row"><th scope="row">theme</th><td id="navigation-theme"></td></tr>'
                 + '<tr class="glimpse-row"><th scope="row">masters</th><td id="navigation-masters"></td></tr>'
                 + '<tr class="glimpse-row"><th scope="row">mobilePage</th><td id="navigation-mobilePage"></td></tr>'
@@ -119,7 +119,25 @@
             processSelectedState = function (elements, state) {
                 elements.key.html(state.dialogKey + '-' + state.key);
                 elements.page.html(state.page);
+                elements.title.html(state.title);
                 elements.route.html(state.route);
+                elements.defaults.html(convertDictionary(state.defaults));
+                elements.defaultTypes.html(convertDictionary(state.defaultTypes));
+                elements.derived.html(state.derived.join(', '));
+                elements.trackCrumbTrail.html(state.trackCrumbTrail.toString());
+                elements.checkPhysicalUrlAccess.html(state.checkPhysicalUrlAccess.toString());
+                elements.theme.html(state.theme);
+                elements.masters.html(state.masters.join(', '));
+                elements.mobilePage.html(state.mobilePage);
+                elements.mobileRoute.html(state.mobileRoute);
+                elements.mobileTheme.html(state.mobileTheme);
+                elements.mobileMasters.html(state.mobileMasters.join(', '));
+            },
+            convertDictionary = function (dictionary) {
+                var arr = [];
+                for (var key in dictionary)
+                    arr.push(key + '=' + dictionary[key]);
+                return arr.join(', ');
             },
             processTransitions = function (context, transitions, font) {
                 context.font = 'italic 12px ' + font;
