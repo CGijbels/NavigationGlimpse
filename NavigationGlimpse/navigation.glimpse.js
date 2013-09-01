@@ -1,6 +1,30 @@
 ﻿(function ($, pubsub) {
     var navigation = {};
 
+    navigation.elements = (function () {
+        var elements = {},
+            find = function () {
+                elements.scope = navigation.scope;
+                elements.key = elements.scope.find('#navigation-key');
+                elements.page = elements.scope.find('#navigation-page');
+                elements.title = elements.scope.find('#navigation-title');
+                elements.route = elements.scope.find('#navigation-route');
+                elements.defaults = elements.scope.find('#navigation-defaults');
+                elements.defaultTypes = elements.scope.find('#navigation-defaultTypes');
+                elements.derived = elements.scope.find('#navigation-derived');
+                elements.trackCrumbTrail = elements.scope.find('#navigation-trackCrumbTrail');
+                elements.checkPhysicalUrlAccess = elements.scope.find('#navigation-checkPhysicalUrlAccess');
+                elements.theme = elements.scope.find('#navigation-theme');
+                elements.masters = elements.scope.find('#navigation-masters');
+                elements.mobilePage = elements.scope.find('#navigation-mobilePage');
+                elements.mobileTheme = elements.scope.find('#navigation-mobileTheme');
+                elements.mobileMasters = elements.scope.find('#navigation-mobileMasters');
+                elements.mobileRoute = elements.scope.find('#navigation-mobileRoute');
+            };
+        pubsub.subscribe('action.navigation.shell.loaded', find);
+        return elements;
+    })();
+
     (function () {
         var setup = function () {
             navigation.scope.html('<div style="display:table;margin:10px auto"><div style="display:table-row">'
@@ -28,6 +52,7 @@
             navigation.canvas.height = 400;
             navigation.canvas.context = navigation.canvas.getContext('2d');
             navigation.font = '"Segoe UI Web Regular", "Segoe UI", "Helvetica Neue", Helvetica, Arial';
+            pubsub.publish('action.navigation.shell.loaded');
         };
         pubsub.subscribe('trigger.navigation.shell.init', setup);
     })();
