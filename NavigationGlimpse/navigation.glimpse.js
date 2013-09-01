@@ -3,7 +3,14 @@
 
     (function () {
         var setup = function () {
-            navigation.scope.html('<canvas id="navigation-glimpse"></canvas>');
+            navigation.scope.html('<div style="display:table"><div style="display:table-row">'
+                + '<div style="display:table-row"><canvas id="navigation-glimpse"></canvas>'
+                + '</div><div style="display:table-cell; vertical-align:top">'
+                + '<table style="width:350px"><tbody class="glimpse-row-holder"><tr class="glimpse-row">'
+                + '<th scope="row" style="width:20%">key</th><td id="navigation-key"></td></tr>'
+                + '<tr class="glimpse-row"><th scope="row">page</th><td id="navigation-page"></td></tr>'
+                + '<tr class="glimpse-row"><th scope="row">route</th><td id="navigation-route"></td></tr>'
+                + '</tbody></table></div></div></div>');
             navigation.canvas = $('#navigation-glimpse')[0];
             navigation.canvas.width = 800;
             navigation.canvas.height = 400;
