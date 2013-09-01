@@ -3,11 +3,11 @@
 
     (function () {
         var setup = function () {
-            navigation.scope.html('<div style="display:table"><div style="display:table-row">'
+            navigation.scope.html('<div style="display:table;margin:10px auto"><div style="display:table-row">'
                 + '<div style="display:table-row"><canvas id="navigation-glimpse"></canvas>'
                 + '</div><div style="display:table-cell; vertical-align:top">'
+                + '<div id="navigation-key" class="glimpse-header" style="text-align:center;padding:0"></div>'
                 + '<table style="width:320px"><tbody class="glimpse-row-holder"><tr class="glimpse-row">'
-                + '<th scope="row" style="width:20%">key</th><td id="navigation-key"></td></tr>'
                 + '<tr class="glimpse-row"><th scope="row">page</th><td id="navigation-page"></td></tr>'
                 + '<tr class="glimpse-row"><th scope="row">route</th><td id="navigation-route"></td></tr>'
                 + '</tbody></table></div></div></div>');
