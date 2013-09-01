@@ -35,9 +35,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Glimpse.Core, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Glimpse.Core, Version=1.6.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Glimpse.1.5.0\lib\net45\Glimpse.Core.dll</HintPath>
+      <HintPath>..\packages\Glimpse.1.6.0\lib\net45\Glimpse.Core.dll</HintPath>
     </Reference>
     <Reference Include="Navigation, Version=1.7.0.0, Culture=neutral, PublicKeyToken=bb3239226a232bfb, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
