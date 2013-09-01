@@ -8,8 +8,20 @@
                 + '</div><div style="display:table-cell; vertical-align:top">'
                 + '<div id="navigation-key" class="glimpse-header" style="text-align:center;padding:0"></div>'
                 + '<table style="width:320px"><tbody class="glimpse-row-holder"><tr class="glimpse-row">'
-                + '<tr class="glimpse-row"><th scope="row">page</th><td id="navigation-page"></td></tr>'
+                + '<th scope="row" style="width:20%">page</th><td id="navigation-page"></td></tr>'
+                + '<tr class="glimpse-row"><th scope="row">title</th><td id="navigation-title"></td></tr>'
                 + '<tr class="glimpse-row"><th scope="row">route</th><td id="navigation-route"></td></tr>'
+                + '<tr class="glimpse-row"><th scope="row">defaults</th><td id="navigation-defaults"></td></tr>'
+                + '<tr class="glimpse-row"><th scope="row">defaultTypes</th><td id="navigation-defaultTypes"></td></tr>'
+                + '<tr class="glimpse-row"><th scope="row">derived</th><td id="navigation-derived"></td></tr>'
+                + '<tr class="glimpse-row"><th scope="row">trackCrumbTrail</th><td id="navigation-trackCrumbTrail"></td></tr>'
+                + '<tr class="glimpse-row"><th scope="row">checkPhysicalUrlAccess</th><td id="navigation-checkPhysicalUrlAccess"></td></tr>'
+                + '<tr class="glimpse-row"><th scope="row">theme</th><td id="navigation-theme"></td></tr>'
+                + '<tr class="glimpse-row"><th scope="row">masters</th><td id="navigation-masters"></td></tr>'
+                + '<tr class="glimpse-row"><th scope="row">mobilePage</th><td id="navigation-mobilePage"></td></tr>'
+                + '<tr class="glimpse-row"><th scope="row">mobileTheme</th><td id="navigation-mobileTheme"></td></tr>'
+                + '<tr class="glimpse-row"><th scope="row">mobileMasters</th><td id="navigation-mobileMasters"></td></tr>'
+                + '<tr class="glimpse-row"><th scope="row">mobileRoute</th><td id="navigation-mobileRoute"></td></tr>'
                 + '</tbody></table></div></div></div>');
             navigation.canvas = $('#navigation-glimpse')[0];
             navigation.canvas.width = 750;
