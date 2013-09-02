@@ -54,6 +54,8 @@
     <Compile Include="ScriptResource.cs" />
     <Compile Include="StateElement.cs" />
     <Compile Include="StateElementConverter.cs" />
+    <Compile Include="StateRouteHandler.cs" />
+    <Compile Include="StateRouteHandlerInspector.cs" />
     <Compile Include="TransitionElement.cs" />
     <Compile Include="TransitionElementConverter.cs" />
   </ItemGroup>
