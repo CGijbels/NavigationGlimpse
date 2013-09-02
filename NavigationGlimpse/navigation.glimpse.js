@@ -6,20 +6,16 @@
             find = function () {
                 elements.scope = navigation.scope;
                 elements.key = elements.scope.find('#navigation-key');
+                elements.data = elements.scope.find('#navigation-data');
                 elements.page = elements.scope.find('#navigation-page');
                 elements.title = elements.scope.find('#navigation-title');
                 elements.route = elements.scope.find('#navigation-route');
-                elements.defaults = elements.scope.find('#navigation-defaults');
+                elements.theme = elements.scope.find('#navigation-theme');
+                elements.masters = elements.scope.find('#navigation-masters');
                 elements.defaultTypes = elements.scope.find('#navigation-defaultTypes');
                 elements.derived = elements.scope.find('#navigation-derived');
                 elements.trackCrumbTrail = elements.scope.find('#navigation-trackCrumbTrail');
                 elements.checkPhysicalUrlAccess = elements.scope.find('#navigation-checkPhysicalUrlAccess');
-                elements.theme = elements.scope.find('#navigation-theme');
-                elements.masters = elements.scope.find('#navigation-masters');
-                elements.mobilePage = elements.scope.find('#navigation-mobilePage');
-                elements.mobileRoute = elements.scope.find('#navigation-mobileRoute');
-                elements.mobileTheme = elements.scope.find('#navigation-mobileTheme');
-                elements.mobileMasters = elements.scope.find('#navigation-mobileMasters');
             };
         pubsub.subscribe('action.navigation.shell.loaded', find);
         return elements;
@@ -32,20 +28,16 @@
                 + '</div><div style="display:table-cell; vertical-align:top">'
                 + '<div id="navigation-key" class="glimpse-header" style="text-align:center;padding:0"></div>'
                 + '<table style="width:320px"><tbody class="glimpse-row-holder"><tr class="glimpse-row">'
-                + '<th scope="row" style="width:20%">page</th><td id="navigation-page"></td></tr>'
+                + '<th scope="row" style="width:20%">data</th><td id="navigation-data"></td></tr>'
+                + '<tr class="glimpse-row"><th scope="row">page</th><td id="navigation-page"></td></tr>'
                 + '<tr class="glimpse-row"><th scope="row">title</th><td id="navigation-title"></td></tr>'
                 + '<tr class="glimpse-row"><th scope="row">route</th><td id="navigation-route"></td></tr>'
-                + '<tr class="glimpse-row"><th scope="row">defaults</th><td id="navigation-defaults"></td></tr>'
+                + '<tr class="glimpse-row"><th scope="row">theme</th><td id="navigation-theme"></td></tr>'
+                + '<tr class="glimpse-row"><th scope="row">masters</th><td id="navigation-masters"></td></tr>'
                 + '<tr class="glimpse-row"><th scope="row">defaultTypes</th><td id="navigation-defaultTypes"></td></tr>'
                 + '<tr class="glimpse-row"><th scope="row">derived</th><td id="navigation-derived"></td></tr>'
                 + '<tr class="glimpse-row"><th scope="row">trackCrumbTrail</th><td id="navigation-trackCrumbTrail"></td></tr>'
                 + '<tr class="glimpse-row"><th scope="row">checkPhysical UrlAccess</th><td id="navigation-checkPhysicalUrlAccess"></td></tr>'
-                + '<tr class="glimpse-row"><th scope="row">theme</th><td id="navigation-theme"></td></tr>'
-                + '<tr class="glimpse-row"><th scope="row">masters</th><td id="navigation-masters"></td></tr>'
-                + '<tr class="glimpse-row"><th scope="row">mobilePage</th><td id="navigation-mobilePage"></td></tr>'
-                + '<tr class="glimpse-row"><th scope="row">mobileRoute</th><td id="navigation-mobileRoute"></td></tr>'
-                + '<tr class="glimpse-row"><th scope="row">mobileTheme</th><td id="navigation-mobileTheme"></td></tr>'
-                + '<tr class="glimpse-row"><th scope="row">mobileMasters</th><td id="navigation-mobileMasters"></td></tr>'
                 + '</tbody></table></div></div></div>');
             navigation.canvas = $('#navigation-glimpse')[0];
             navigation.canvas.width = 750;
@@ -118,20 +110,16 @@
             },
             processSelectedState = function (elements, state) {
                 elements.key.text(state.dialogKey + '-' + state.key);
+                elements.data.text(convertDictionary(state.defaults));
                 elements.page.text(state.page);
                 elements.title.text(state.title);
                 elements.route.text(state.route);
-                elements.defaults.text(convertDictionary(state.defaults));
+                elements.theme.text(state.theme);
+                elements.masters.text(state.masters.join(', '));
                 elements.defaultTypes.text(convertDictionary(state.defaultTypes));
                 elements.derived.text(state.derived.join(', '));
                 elements.trackCrumbTrail.text(state.trackCrumbTrail.toString());
                 elements.checkPhysicalUrlAccess.text(state.checkPhysicalUrlAccess.toString());
-                elements.theme.text(state.theme);
-                elements.masters.text(state.masters.join(', '));
-                elements.mobilePage.text(state.mobilePage);
-                elements.mobileRoute.text(state.mobileRoute);
-                elements.mobileTheme.text(state.mobileTheme);
-                elements.mobileMasters.text(state.mobileMasters.join(', '));
             },
             convertDictionary = function (dictionary) {
                 var arr = [];
