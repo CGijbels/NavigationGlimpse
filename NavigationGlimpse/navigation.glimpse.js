@@ -117,21 +117,21 @@
                 }
             },
             processSelectedState = function (elements, state) {
-                elements.key.html(state.dialogKey + '-' + state.key);
-                elements.page.html(state.page);
-                elements.title.html(state.title);
-                elements.route.html(state.route);
-                elements.defaults.html(convertDictionary(state.defaults));
-                elements.defaultTypes.html(convertDictionary(state.defaultTypes));
-                elements.derived.html(state.derived.join(', '));
-                elements.trackCrumbTrail.html(state.trackCrumbTrail.toString());
-                elements.checkPhysicalUrlAccess.html(state.checkPhysicalUrlAccess.toString());
-                elements.theme.html(state.theme);
-                elements.masters.html(state.masters.join(', '));
-                elements.mobilePage.html(state.mobilePage);
-                elements.mobileRoute.html(state.mobileRoute);
-                elements.mobileTheme.html(state.mobileTheme);
-                elements.mobileMasters.html(state.mobileMasters.join(', '));
+                elements.key.text(state.dialogKey + '-' + state.key);
+                elements.page.text(state.page);
+                elements.title.text(state.title);
+                elements.route.text(state.route);
+                elements.defaults.text(convertDictionary(state.defaults));
+                elements.defaultTypes.text(convertDictionary(state.defaultTypes));
+                elements.derived.text(state.derived.join(', '));
+                elements.trackCrumbTrail.text(state.trackCrumbTrail.toString());
+                elements.checkPhysicalUrlAccess.text(state.checkPhysicalUrlAccess.toString());
+                elements.theme.text(state.theme);
+                elements.masters.text(state.masters.join(', '));
+                elements.mobilePage.text(state.mobilePage);
+                elements.mobileRoute.text(state.mobileRoute);
+                elements.mobileTheme.text(state.mobileTheme);
+                elements.mobileMasters.text(state.mobileMasters.join(', '));
             },
             convertDictionary = function (dictionary) {
                 var arr = [];
