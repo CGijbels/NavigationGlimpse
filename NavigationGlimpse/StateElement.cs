@@ -29,5 +29,7 @@ namespace NavigationGlimpse
         public bool Previous { get; set; }
 
         public int Back { get; set; }
+
+        public NavigationData Data { get; set; }
     }
 }

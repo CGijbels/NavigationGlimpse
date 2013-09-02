@@ -110,7 +110,7 @@
             },
             processSelectedState = function (elements, state) {
                 elements.key.text(state.dialogKey + '-' + state.key);
-                elements.data.text(convertDictionary(state.defaults));
+                elements.data.text(convertDictionary(state.data));
                 elements.page.text(state.page);
                 elements.title.text(state.title);
                 elements.route.text(state.route);

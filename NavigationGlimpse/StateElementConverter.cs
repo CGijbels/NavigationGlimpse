@@ -24,7 +24,7 @@ namespace NavigationGlimpse
                 stateEl.State.Page,
                 stateEl.State.Title,
                 stateEl.State.Route,
-                Defaults = GetDictionary<object>(stateEl.State.Defaults),
+                Data = GetDictionary(stateEl.Data),
                 DefaultTypes = GetDictionary<Type>(stateEl.State.DefaultTypes),
                 stateEl.State.Derived,
                 stateEl.State.TrackCrumbTrail,
@@ -36,6 +36,14 @@ namespace NavigationGlimpse
                 stateEl.State.MobileTheme,
                 stateEl.State.MobileMasters
             };
+        }
+
+        private Dictionary<string, object> GetDictionary(NavigationData data)
+        {
+            var dictionary = new Dictionary<string, object>();
+            foreach (NavigationDataItem item in data)
+                dictionary[item.Key] = item.Value;
+            return dictionary;
         }
 
         private Dictionary<string, object> GetDictionary<T>(StateInfoCollection<T> coll)

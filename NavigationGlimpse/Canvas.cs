@@ -23,7 +23,7 @@ namespace NavigationGlimpse
             var stateX = Left;
             var stateY = Top;
             var crumbs = StateController.Crumbs.Select((c, i) => new { Crumb = c, Index = i })
-                .ToDictionary(c => c.Crumb.State, c => c.Index);
+                .ToDictionary(c => c.Crumb.State, c => new { Crumb = c.Crumb, c.Index });
             foreach (Dialog dialog in StateInfoConfig.Dialogs)
             {
                 stateX = Left;
@@ -36,11 +36,24 @@ namespace NavigationGlimpse
                     stateElement.Y = stateY;
                     stateElement.W = StateWidth;
                     stateElement.H = StateHeight;
-                    stateElement.Current = state == StateContext.State;
+                    if (state == StateContext.State)
+                    {
+                        stateElement.Current = state == StateContext.State;
+                        stateElement.Data = StateContext.Data;
+                    }
                     stateElement.Previous = state == StateContext.PreviousState;
                     stateElement.Back = 0;
                     if (crumbs.ContainsKey(state))
-                        stateElement.Back = crumbs.Count - crumbs[state];
+                    {
+                        stateElement.Back = crumbs.Count - crumbs[state].Index;
+                        stateElement.Data = crumbs[state].Crumb.Data;
+                    }
+                    if (stateElement.Data == null)
+                    {
+                        stateElement.Data = new NavigationData();
+                        foreach (string key in stateElement.State.Defaults.Keys)
+                            stateElement.Data[key] = stateElement.State.Defaults[key];
+                    }
                     ProcessTransitions(stateElement, transitionElements);
                     stateX += StateWidth + StateSeparation;
                 }
