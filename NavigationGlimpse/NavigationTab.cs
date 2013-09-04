@@ -1,4 +1,5 @@
 ﻿using Glimpse.Core.Extensibility;
+using Glimpse.Core.Extensions;
 using Navigation;
 using System;
 using System.Collections.Generic;
@@ -8,10 +9,11 @@ using System.Threading.Tasks;
 
 namespace NavigationGlimpse
 {
-    public class NavigationTab : TabBase, IKey
+    public class NavigationTab : TabBase, ITabSetup, IKey
     {
         public override object GetData(ITabContext context)
         {
+            var getDisplayInfoForPageMessage = context.GetMessages<StateRouteHandler.GetDisplayInfoForPage.Message>().FirstOrDefault();
             return Canvas.Arrange();
         }
 
@@ -29,6 +31,11 @@ namespace NavigationGlimpse
             {
                 return "navigation_glimpse";
             }
+        }
+
+        public void Setup(ITabSetupContext context)
+        {
+            context.PersistMessages<StateRouteHandler.GetDisplayInfoForPage.Message>();
         }
     }
 }

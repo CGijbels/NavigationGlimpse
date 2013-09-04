@@ -1,6 +1,8 @@
 ﻿using Glimpse.Core.Extensibility;
+using Glimpse.Core.Message;
 using System.Collections.Generic;
 using System.Reflection;
+using System.Web.WebPages;
 
 namespace NavigationGlimpse
 {
@@ -38,6 +40,22 @@ namespace NavigationGlimpse
 
             public override void PostImplementation(IAlternateMethodContext context, TimerResult timerResult)
             {
+                var displayInfo = context.ReturnValue as DisplayInfo;
+                var message = new Message(displayInfo.DisplayMode.DisplayModeId, displayInfo.FilePath);
+                context.MessageBroker.Publish(message);
+            }
+
+            public class Message : MessageBase
+            {
+                public Message(string displayMode, string page)
+                {
+                    DisplayMode = displayMode;
+                    Page = page;
+                }
+
+                public string DisplayMode { get; set; }
+
+                public string Page { get; set; }
             }
         }
 
