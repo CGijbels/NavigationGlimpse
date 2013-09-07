@@ -31,5 +31,7 @@ namespace NavigationGlimpse
         public int Back { get; set; }
 
         public NavigationData Data { get; set; }
+
+        public string Page { get; set; }
     }
 }

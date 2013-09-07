@@ -16,7 +16,7 @@ namespace NavigationGlimpse
         private const int TransitionStepHeight = 20;
         private const int DialogSeparation = 20;
 
-        public static Tuple<List<StateElement>, List<TransitionElement>> Arrange()
+        public static Tuple<List<StateElement>, List<TransitionElement>> Arrange(string page)
         {
             var transitionElements = new List<TransitionElement>();
             var stateElements = new List<StateElement>();
@@ -36,10 +36,12 @@ namespace NavigationGlimpse
                     stateElement.Y = stateY;
                     stateElement.W = StateWidth;
                     stateElement.H = StateHeight;
+                    stateElement.Page = state.Page;
                     if (state == StateContext.State)
                     {
                         stateElement.Current = state == StateContext.State;
                         stateElement.Data = StateContext.Data;
+                        stateElement.Page = page;
                     }
                     stateElement.Previous = state == StateContext.PreviousState;
                     stateElement.Back = 0;

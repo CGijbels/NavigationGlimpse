@@ -21,7 +21,7 @@ namespace NavigationGlimpse
                 stateEl.Back,
                 Selected = stateEl.Current,
                 DialogKey = stateEl.State.Parent.Key,
-                stateEl.State.Page,
+                stateEl.Page,
                 stateEl.State.Title,
                 stateEl.State.Route,
                 Data = GetDictionary(stateEl.Data),

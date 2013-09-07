@@ -13,8 +13,14 @@ namespace NavigationGlimpse
     {
         public override object GetData(ITabContext context)
         {
+            string page = null;
             var getDisplayInfoForPageMessage = context.GetMessages<StateRouteHandler.GetDisplayInfoForPage.Message>().FirstOrDefault();
-            return Canvas.Arrange();
+            var getPageForDisplayInfoMessage = context.GetMessages<StateRouteHandler.GetPageForDisplayInfo.Message>().FirstOrDefault();
+            if (getDisplayInfoForPageMessage != null)
+                page = getDisplayInfoForPageMessage.Page;
+            if (getPageForDisplayInfoMessage != null)
+                page = getPageForDisplayInfoMessage.Page;
+            return Canvas.Arrange(page);
         }
 
         public override string Name
@@ -36,6 +42,7 @@ namespace NavigationGlimpse
         public void Setup(ITabSetupContext context)
         {
             context.PersistMessages<StateRouteHandler.GetDisplayInfoForPage.Message>();
+            context.PersistMessages<StateRouteHandler.GetPageForDisplayInfo.Message>();
         }
     }
 }

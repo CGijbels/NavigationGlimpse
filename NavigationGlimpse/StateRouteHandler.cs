@@ -68,6 +68,23 @@ namespace NavigationGlimpse
 
             public override void PostImplementation(IAlternateMethodContext context, TimerResult timerResult)
             {
+                var displayInfo = context.Arguments[0] as DisplayInfo;
+                var page = context.ReturnValue as string;
+                var message = new Message(displayInfo.DisplayMode.DisplayModeId, page);
+                context.MessageBroker.Publish(message);
+            }
+
+            public class Message : MessageBase
+            {
+                public Message(string displayMode, string page)
+                {
+                    DisplayMode = displayMode;
+                    Page = page;
+                }
+
+                public string DisplayMode { get; set; }
+
+                public string Page { get; set; }
             }
         }
 
