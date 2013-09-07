@@ -6,12 +6,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
+using System.Web.WebPages;
 
 namespace NavigationGlimpse
 {
     public class NavigationTab : TabBase, ITabSetup, IKey
     {
         public override object GetData(ITabContext context)
+        {
+            var mobile = context.GetRequestContext<HttpContextBase>().GetOverriddenBrowser().IsMobileDevice;
+            var page = GetCurrentPage(context, mobile);
+            return Canvas.Arrange(page);
+        }
+
+        private string GetCurrentPage(ITabContext context, bool mobile)
         {
             string page = null;
             var getDisplayInfoForPageMessage = context.GetMessages<StateRouteHandler.GetDisplayInfoForPage.Message>().FirstOrDefault();
@@ -20,7 +29,9 @@ namespace NavigationGlimpse
                 page = getDisplayInfoForPageMessage.Page;
             if (getPageForDisplayInfoMessage != null)
                 page = getPageForDisplayInfoMessage.Page;
-            return Canvas.Arrange(page);
+            if (page == null)
+                page = !mobile || StateContext.State.MobilePage.Length == 0 ? StateContext.State.Page : StateContext.State.MobilePage;
+            return page;
         }
 
         public override string Name
