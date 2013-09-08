@@ -2,6 +2,7 @@
 using Navigation;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace NavigationGlimpse
 {
@@ -41,7 +42,7 @@ namespace NavigationGlimpse
         private Dictionary<string, object> GetDictionary(NavigationData data)
         {
             var dictionary = new Dictionary<string, object>();
-            foreach (NavigationDataItem item in data)
+            foreach (NavigationDataItem item in data.OrderBy(i => i.Key))
                 dictionary[item.Key] = item.Value;
             return dictionary;
         }
