@@ -1,8 +1,13 @@
-﻿using System;
-using System.Linq;
+﻿using Glimpse.Core.Extensibility.Fakes;
+using Glimpse.Core.Extensions.Fakes;
+using Microsoft.QualityTools.Testing.Fakes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Collections.Generic;
 using Navigation;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+using System.Web.Fakes;
 
 namespace NavigationGlimpse.Test
 {
@@ -24,9 +29,21 @@ namespace NavigationGlimpse.Test
         [ClassInitialize]
         public static void Initialize(TestContext testContext)
         {
-            var elements = (Tuple<List<StateElement>,List<TransitionElement>>) new NavigationTab().GetData(null);
-            StateElements = elements.Item1;
-            TransitionElements = elements.Item2;
+            using (ShimsContext.Create())
+            {
+                StateController.Navigate("D1");
+                var tabContext = new StubITabContext();
+                var request = new StubHttpRequestBase();
+                request.ItemGetString = k => string.Empty;
+                tabContext.GetRequestContextOf1<HttpContextBase>(() => new StubHttpContextBase { RequestGet = () => request });
+                ShimTabContextExtensions.GetMessagesOf1ITabContext<StateRouteHandler.GetDisplayInfoForPage.Message>(t =>
+                    new List<StateRouteHandler.GetDisplayInfoForPage.Message>());
+                ShimTabContextExtensions.GetMessagesOf1ITabContext<StateRouteHandler.GetPageForDisplayInfo.Message>(t =>
+                    new List<StateRouteHandler.GetPageForDisplayInfo.Message>());
+                var elements = (Tuple<List<StateElement>, List<TransitionElement>>)new NavigationTab().GetData(tabContext);
+                StateElements = elements.Item1;
+                TransitionElements = elements.Item2;
+            }
         }
 
         private static StateElement GetState(string statePath)

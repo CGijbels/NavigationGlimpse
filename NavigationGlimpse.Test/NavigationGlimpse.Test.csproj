@@ -39,11 +39,19 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Glimpse.1.6.0\lib\net45\Glimpse.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Glimpse.Core.1.6.0.0.Fakes">
+      <HintPath>FakesAssemblies\Glimpse.Core.1.6.0.0.Fakes.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Navigation, Version=1.7.0.0, Culture=neutral, PublicKeyToken=bb3239226a232bfb, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Navigation.1.7\lib\4.5\Navigation.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.4.0.0.0.Fakes">
+      <HintPath>FakesAssemblies\System.Web.4.0.0.0.Fakes.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Choose>
     <When Condition="('$(VisualStudioVersion)' == '10.0' or '$(VisualStudioVersion)' == '') and '$(TargetFrameworkVersion)' == 'v3.5'">
@@ -69,6 +77,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <Fakes Include="Fakes\Glimpse.Core.fakes" />
+    <Fakes Include="Fakes\System.Web.fakes" />
     <None Include="packages.config" />
     <None Include="StateInfo.config">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>

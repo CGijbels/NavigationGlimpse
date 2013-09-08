@@ -53,6 +53,7 @@
     <Compile Include="NavigationTab.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ScriptResource.cs" />
+    <Compile Include="StateDisplayInfo.cs" />
     <Compile Include="StateElement.cs" />
     <Compile Include="StateElementConverter.cs" />
     <Compile Include="StateRouteHandler.cs" />

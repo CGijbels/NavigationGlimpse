@@ -18,8 +18,11 @@ namespace NavigationGlimpse
             var request = context.GetRequestContext<HttpContextBase>();
             var mobile = request.Request["n0"] == null ? request.GetOverriddenBrowser().IsMobileDevice : 
                 request.Request["n0"].StartsWith("Mobile", StringComparison.Ordinal);
-            var page = GetCurrentPage(context, mobile);
-            return Canvas.Arrange(page);
+            return Canvas.Arrange(new StateDisplayInfo
+            {
+                Page = GetCurrentPage(context, mobile),
+                Route = GetCurrentRoute(mobile)
+            });
         }
 
         private string GetCurrentPage(ITabContext context, bool mobile)
@@ -34,6 +37,12 @@ namespace NavigationGlimpse
             if (page == null)
                 page = !mobile || StateContext.State.MobilePage.Length == 0 ? StateContext.State.Page : StateContext.State.MobilePage;
             return page;
+        }
+
+        private string GetCurrentRoute(bool mobile)
+        {
+            return !mobile || (StateContext.State.MobilePage.Length == 0 && StateContext.State.MobileRoute.Length == 0) ? 
+                StateContext.State.Route : StateContext.State.MobileRoute;
         }
 
         public override string Name

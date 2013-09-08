@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace NavigationGlimpse
 {
-    public class Canvas
+    internal class Canvas
     {
         private const int Top = 10;
         private const int Left = 10;
@@ -16,7 +16,7 @@ namespace NavigationGlimpse
         private const int TransitionStepHeight = 20;
         private const int DialogSeparation = 20;
 
-        public static Tuple<List<StateElement>, List<TransitionElement>> Arrange(string page)
+        internal static Tuple<List<StateElement>, List<TransitionElement>> Arrange(StateDisplayInfo stateDisplayInfo)
         {
             var transitionElements = new List<TransitionElement>();
             var stateElements = new List<StateElement>();
@@ -41,7 +41,7 @@ namespace NavigationGlimpse
                     {
                         stateElement.Current = state == StateContext.State;
                         stateElement.Data = StateContext.Data;
-                        stateElement.Page = page;
+                        stateElement.Page = stateDisplayInfo.Page;
                     }
                     stateElement.Previous = state == StateContext.PreviousState;
                     stateElement.Back = 0;
