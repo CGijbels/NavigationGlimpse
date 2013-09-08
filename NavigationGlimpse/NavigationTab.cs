@@ -15,7 +15,9 @@ namespace NavigationGlimpse
     {
         public override object GetData(ITabContext context)
         {
-            var mobile = context.GetRequestContext<HttpContextBase>().GetOverriddenBrowser().IsMobileDevice;
+            var request = context.GetRequestContext<HttpContextBase>();
+            var mobile = request.Request["n0"] == null ? request.GetOverriddenBrowser().IsMobileDevice : 
+                request.Request["n0"].StartsWith("Mobile", StringComparison.Ordinal);
             var page = GetCurrentPage(context, mobile);
             return Canvas.Arrange(page);
         }
