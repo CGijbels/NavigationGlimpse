@@ -24,10 +24,10 @@
     (function () {
         var setup = function () {
             navigation.scope.html('<div style="display:table;margin:10px auto"><div style="display:table-row">'
-                + '<div style="display:table-row"><canvas id="navigation-glimpse"></canvas>'
+                + '<div style="display:table-row"><canvas id="navigation-glimpse" style="border:1px solid #000"></canvas>'
                 + '</div><div style="display:table-cell; vertical-align:top">'
                 + '<div id="navigation-key" class="glimpse-header" style="text-align:center;padding:0"></div>'
-                + '<table style="width:320px"><tbody class="glimpse-row-holder"><tr class="glimpse-row">'
+                + '<table style="width:320px;margin-left:10px"><tbody class="glimpse-row-holder"><tr class="glimpse-row">'
                 + '<th scope="row" style="width:20%">Data</th><td id="navigation-data"></td></tr>'
                 + '<tr class="glimpse-row"><th scope="row">Page</th><td id="navigation-page"></td></tr>'
                 + '<tr class="glimpse-row"><th scope="row">Title</th><td id="navigation-title"></td></tr>'
@@ -41,7 +41,7 @@
                 + '</tbody></table></div></div></div>');
             navigation.canvas = $('#navigation-glimpse')[0];
             navigation.canvas.width = 750;
-            navigation.canvas.height = 400;
+            navigation.canvas.height = 275;
             navigation.canvas.context = navigation.canvas.getContext('2d');
             navigation.font = '"Segoe UI Web Regular", "Segoe UI", "Helvetica Neue", Helvetica, Arial';
             pubsub.publish('action.navigation.shell.loaded');
@@ -52,7 +52,7 @@
     (function () {
         var wireListeners = function () {
                 navigation.scope.delegate('#navigation-glimpse', 'click', function (e) {
-                    update(navigation.states, e.offsetX, e.offsetY);
+                    update(navigation.states, e.offsetX - navigation.x, e.offsetY - navigation.y);
                     render();
                 });
             },
@@ -72,9 +72,12 @@
                     oldSelection.selected = false;
             },
             render = function () {
+                navigation.canvas.context.save();
                 navigation.canvas.context.clearRect(0, 0, navigation.canvas.width, navigation.canvas.height);
+                navigation.canvas.context.translate(navigation.x, navigation.y);
                 processStates(navigation.canvas.context, navigation.states, navigation.font);
                 processTransitions(navigation.canvas.context, navigation.transitions, navigation.font);
+                navigation.canvas.context.restore();
             },
             processStates = function (context, states, font) {
                 for (var i = 0; i < states.length; i++) {
@@ -161,8 +164,10 @@
         },
         postrender = function (args) {
             navigation.data = args.pluginData._data;
-            navigation.states = navigation.data.item1;
-            navigation.transitions = navigation.data.item2;
+            navigation.states = navigation.data.states;
+            navigation.transitions = navigation.data.transitions;
+            navigation.x = navigation.data.x;
+            navigation.y = navigation.data.y;
             navigation.scope = args.panel;
             args.pluginData.data = 'Loading data, please wait...';
             pubsub.publishAsync('trigger.navigation.init');

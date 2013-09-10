@@ -16,7 +16,7 @@ namespace NavigationGlimpse
         private const int TransitionStepHeight = 20;
         private const int DialogSeparation = 20;
 
-        internal static Tuple<List<StateElement>, List<TransitionElement>> Arrange(StateDisplayInfo stateDisplayInfo)
+        internal static CanvasData Arrange(StateDisplayInfo stateDisplayInfo)
         {
             var transitionElements = new List<TransitionElement>();
             var stateElements = new List<StateElement>();
@@ -61,7 +61,13 @@ namespace NavigationGlimpse
                 }
                 stateY += Top + StateHeight + depths.Count * TransitionStepHeight + DialogSeparation;
             }
-            return new Tuple<List<StateElement>,List<TransitionElement>>(stateElements, transitionElements);
+            return new CanvasData
+            {
+                States = stateElements,
+                Transitions = transitionElements,
+                X = 0,
+                Y = 0
+            };
         }
 
         private static Dictionary<int, HashSet<int>> CalculateDepths(Dialog dialog, List<TransitionElement> transEls)

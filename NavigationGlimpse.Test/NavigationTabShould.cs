@@ -40,9 +40,9 @@ namespace NavigationGlimpse.Test
                     new List<StateRouteHandler.GetDisplayInfoForPage.Message>());
                 ShimTabContextExtensions.GetMessagesOf1ITabContext<StateRouteHandler.GetPageForDisplayInfo.Message>(t =>
                     new List<StateRouteHandler.GetPageForDisplayInfo.Message>());
-                var elements = (Tuple<List<StateElement>, List<TransitionElement>>)new NavigationTab().GetData(tabContext);
-                StateElements = elements.Item1;
-                TransitionElements = elements.Item2;
+                var elements = (CanvasData)new NavigationTab().GetData(tabContext);
+                StateElements = elements.States;
+                TransitionElements = elements.Transitions;
             }
         }
 

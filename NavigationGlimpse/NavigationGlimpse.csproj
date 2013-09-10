@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Canvas.cs" />
+    <Compile Include="CanvasData.cs" />
     <Compile Include="ClientScript.cs" />
     <Compile Include="NavigationTab.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
