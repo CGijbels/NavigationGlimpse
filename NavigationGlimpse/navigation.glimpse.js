@@ -70,8 +70,8 @@
                 });
                 $(document).mousemove(function (e) {
                     if (dragging) {
-                        navigation.x = Math.max(Math.min(0, e.pageX - x), -1 * navigation.w + 750);
-                        navigation.y = Math.max(Math.min(0, e.pageY - y), -1 * navigation.h + 275);
+                        navigation.x = Math.max(Math.min(0, e.pageX - x), -1 * navigation.w + navigation.canvas.width);
+                        navigation.y = Math.max(Math.min(0, e.pageY - y), -1 * navigation.h + navigation.canvas.height);
                         render();
                     } else {
                         if (e.target === navigation.canvas) {
