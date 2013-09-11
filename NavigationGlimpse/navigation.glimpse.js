@@ -54,11 +54,11 @@
                 var dragging = false;
                 var x, y = 0;
                 navigation.scope.delegate('#navigation-glimpse', 'click', function (e) {
-                    update(navigation.states, e.offsetX - navigation.x, e.offsetY - navigation.y);
+                    update(navigation.states, getPoint(e));
                     render();
                 });
                 navigation.scope.delegate('#navigation-glimpse', 'mousedown', function (e) {
-                    if (!getState(navigation.states, e.offsetX - navigation.x, e.offsetY - navigation.y)) {
+                    if (!getState(navigation.states, getPoint(e))) {
                         e.preventDefault();
                         dragging = true;
                         x = e.pageX - navigation.x;
@@ -75,7 +75,7 @@
                         render();
                     } else {
                         if (e.target === navigation.canvas) {
-                            if (getState(navigation.states, e.offsetX - navigation.x, e.offsetY - navigation.y))
+                            if (getState(navigation.states, getPoint(e)))
                                 navigation.canvas.style.cursor = 'pointer';
                             else
                                 navigation.canvas.style.cursor = '';
@@ -83,22 +83,27 @@
                     }
                 });
             },
-            getState = function (states, x, y) {
+            getPoint = function (e) {
+                return { x: e.offsetX - navigation.x, y: e.offsetY - navigation.y };
+            },
+            getState = function (states, point) {
                 for (var i = 0; i < states.length; i++) {
                     var state = states[i];
-                    if (state.x <= x && x <= state.x + state.w && state.y <= y && y <= state.y + state.h)
+                    if (state.x <= point.x && point.x <= state.x + state.w &&
+                        state.y <= point.y && point.y <= state.y + state.h)
                         return state;
                 }
                 return null;
             },
-            update = function (states, x, y) {
+            update = function (states, point) {
                 var oldSelection,
                     newSelection = null;
                 for (var i = 0; i < states.length; i++) {
                     var state = states[i];
                     if (state.selected)
                         oldSelection = state;
-                    if (state.x <= x && x <= state.x + state.w && state.y <= y && y <= state.y + state.h) {
+                    if (state.x <= point.x && point.x <= state.x + state.w &&
+                        state.y <= point.y && point.y <= state.y + state.h) {
                         state.selected = true;
                         newSelection = state;
                     }
