@@ -70,8 +70,8 @@
                 });
                 $(document).mousemove(function (e) {
                     if (dragging) {
-                        navigation.x = e.pageX - x;
-                        navigation.y = e.pageY - y;
+                        navigation.x = Math.max(Math.min(0, e.pageX - x), -1 * navigation.w + 750);
+                        navigation.y = Math.max(Math.min(0, e.pageY - y), -1 * navigation.h + 275);
                         render();
                     } else {
                         if (e.target === navigation.canvas) {
@@ -208,6 +208,8 @@
             navigation.transitions = navigation.data.transitions;
             navigation.x = navigation.data.x;
             navigation.y = navigation.data.y;
+            navigation.w = navigation.data.w;
+            navigation.h = navigation.data.h;
             navigation.scope = args.panel;
             args.pluginData.data = 'Loading data, please wait...';
             pubsub.publishAsync('trigger.navigation.init');

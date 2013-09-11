@@ -15,6 +15,7 @@ namespace NavigationGlimpse
         private const int TransitionSeparation = 20;
         private const int TransitionStepHeight = 20;
         private const int DialogSeparation = 20;
+        private const int FontSize = 12;
 
         internal static CanvasData Arrange(StateDisplayInfo stateDisplayInfo)
         {
@@ -66,7 +67,9 @@ namespace NavigationGlimpse
                 States = stateElements,
                 Transitions = transitionElements,
                 X = 0,
-                Y = 0
+                Y = 0,
+                W = stateElements.Max(s => s.X + s.W) + Left,
+                H = transitionElements.Max(t => t.Y + t.H) + Top + FontSize
             };
         }
 
