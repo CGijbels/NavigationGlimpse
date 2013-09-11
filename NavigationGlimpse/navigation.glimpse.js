@@ -51,10 +51,45 @@
 
     (function () {
         var wireListeners = function () {
+                var dragging = false;
+                var x, y = 0;
                 navigation.scope.delegate('#navigation-glimpse', 'click', function (e) {
                     update(navigation.states, e.offsetX - navigation.x, e.offsetY - navigation.y);
                     render();
                 });
+                navigation.scope.delegate('#navigation-glimpse', 'mousedown', function (e) {
+                    if (!getState(navigation.states, e.offsetX - navigation.x, e.offsetY - navigation.y)) {
+                        e.preventDefault();
+                        dragging = true;
+                        x = e.pageX - navigation.x;
+                        y = e.pageY - navigation.y;
+                    }
+                });
+                $(document).mouseup(function (e) {
+                    dragging = false;
+                });
+                $(document).mousemove(function (e) {
+                    if (dragging) {
+                        navigation.x = e.pageX - x;
+                        navigation.y = e.pageY - y;
+                        render();
+                    } else {
+                        if (e.target === navigation.canvas) {
+                            if (getState(navigation.states, e.offsetX - navigation.x, e.offsetY - navigation.y))
+                                navigation.canvas.style.cursor = 'pointer';
+                            else
+                                navigation.canvas.style.cursor = '';
+                        }
+                    }
+                });
+            },
+            getState = function (states, x, y) {
+                for (var i = 0; i < states.length; i++) {
+                    var state = states[i];
+                    if (state.x <= x && x <= state.x + state.w && state.y <= y && y <= state.y + state.h)
+                        return state;
+                }
+                return null;
             },
             update = function (states, x, y) {
                 var oldSelection,
@@ -88,8 +123,8 @@
                         context.fillStyle = '#e6f5e6';
                         processSelectedState(navigation.elements, state);
                     }
-                    context.shadowOffsetX = 2;
-                    context.shadowOffsetY = 2;
+                    context.shadowOffsetX = 3;
+                    context.shadowOffsetY = 3;
                     context.shadowBlur = 10;
                     context.shadowColor = '#999';
                     context.beginPath();
