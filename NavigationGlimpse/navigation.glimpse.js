@@ -84,7 +84,10 @@
                 });
             },
             getPoint = function (e) {
-                return { x: e.offsetX - navigation.x, y: e.offsetY - navigation.y };
+                return {
+                    x: (e.offsetX ? e.offsetX : e.pageX - $(navigation.canvas).offset().left) - navigation.x,
+                    y: (e.offsetY ? e.offsetY : e.pageY - $(navigation.canvas).offset().top) - navigation.y
+                };
             },
             getState = function (states, point) {
                 for (var i = 0; i < states.length; i++) {
