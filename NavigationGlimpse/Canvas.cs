@@ -18,6 +18,7 @@ namespace NavigationGlimpse
         private const int TransitionStepHeight = 20;
         private const int DialogSeparation = 20;
         private const int FontSize = 12;
+        private const int StatePadding = 10;
 
         internal static CanvasData Arrange(StateDisplayInfo stateDisplayInfo)
         {
@@ -37,7 +38,6 @@ namespace NavigationGlimpse
                     stateElements.Add(stateElement);
                     stateElement.X = stateX;
                     stateElement.Y = stateY;
-                    stateElement.W = StateWidth;
                     stateElement.H = StateHeight;
                     stateElement.Page = state.Page;
                     if (state == StateContext.State)
@@ -59,8 +59,8 @@ namespace NavigationGlimpse
                         foreach (string key in stateElement.State.Defaults.Keys)
                             stateElement.Data[key] = stateElement.State.Defaults[key];
                     }
-                    ProcessTransitions(stateElement, transitionElements);
-                    stateX += StateWidth + StateSeparation;
+                    stateElement.W = ProcessTransitions(stateElement, transitionElements);
+                    stateX += stateElement.W + StateSeparation;
                 }
                 stateY += Top + StateHeight + depths.Count * TransitionStepHeight + DialogSeparation;
             }
@@ -109,11 +109,12 @@ namespace NavigationGlimpse
             depths[transEl.Depth].UnionWith(Enumerable.Range(transEl.A, transEl.B - transEl.A));
         }
 
-        private static void ProcessTransitions(StateElement stateElement, List<TransitionElement> transEls)
+        private static int ProcessTransitions(StateElement stateElement, List<TransitionElement> transEls)
         {
             var trans = TransByState(stateElement.State, transEls);
             var transWidth = (trans.Count() - 1) * TransitionSeparation;
-            var start = stateElement.X + (StateWidth - transWidth) / 2;
+            var width = StateWidth + Math.Max(0, transWidth + 2 * StatePadding - StateWidth);
+            var start = stateElement.X + (width - transWidth) / 2;
             foreach (var transEl in trans)
             {
                 transEl.Y = stateElement.Y + StateHeight;
@@ -121,6 +122,7 @@ namespace NavigationGlimpse
                 transEl.SetCoords(stateElement.State, start);
                 start += TransitionSeparation;
             }
+            return width;
         }
 
         private static IEnumerable<TransitionElement> TransByState(State state, List<TransitionElement> transEls)
