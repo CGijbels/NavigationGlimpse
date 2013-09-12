@@ -71,7 +71,7 @@ namespace NavigationGlimpse
                 States = stateElements,
                 Transitions = transitionElements,
                 X = Math.Min(0, Width - selected.X - selected.W - Left),
-                Y = Math.Min(0, Height - selectedDialogTrans.Max(t => t.Y + t.H) - Top - FontSize),
+                Y = Math.Min(0, Height - Math.Min(selected.Y + Height - Top, selectedDialogTrans.Max(t => t.Y + t.H + Top + FontSize))),
                 W = stateElements.Max(s => s.X + s.W) + Left,
                 H = transitionElements.Max(t => t.Y + t.H) + Top + FontSize
             };

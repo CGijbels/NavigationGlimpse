@@ -12,7 +12,9 @@
 		<asp:HyperLink runat="server" NavigateUrl="{NavigationLink Next,name=Bob}" Text="Next" />
 		<asp:HyperLink runat="server" NavigateUrl="{NavigationLink Sample,age=19}" Text="Sample" />
 		<asp:HyperLink runat="server" NavigateUrl="{NavigationLink Sample2,name=Brenda}" Text="Sample2" />
+		<asp:HyperLink runat="server" NavigateUrl="{NavigationLink Sample3}" Text="Sample3" />
 		<asp:HyperLink runat="server" NavigateUrl="{NavigationLink Sample4}" Text="Sample4" />
+		<asp:HyperLink runat="server" NavigateUrl="{NavigationLink Sample5}" Text="Sample5" />
 		<asp:Button runat="server" Text="Submit" />
     </div>
     </form>
