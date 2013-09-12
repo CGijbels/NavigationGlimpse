@@ -9,6 +9,8 @@ namespace NavigationGlimpse
     {
         private const int Top = 10;
         private const int Left = 10;
+        private const int Width = 750;
+        private const int Height = 275;
         private const int StateWidth = 150;
         private const int StateHeight = 50;
         private const int StateSeparation = 40;
@@ -62,12 +64,14 @@ namespace NavigationGlimpse
                 }
                 stateY += Top + StateHeight + depths.Count * TransitionStepHeight + DialogSeparation;
             }
+            var selected = stateElements.First(s => s.Current);
+            var selectedDialogTrans = transitionElements.Where(t => t.Transition.Parent.Parent == selected.State.Parent);
             return new CanvasData
             {
                 States = stateElements,
                 Transitions = transitionElements,
-                X = 0,
-                Y = 0,
+                X = Math.Min(0, Width - selected.X - selected.W - Left),
+                Y = Math.Min(0, Height - selectedDialogTrans.Max(t => t.Y + t.H) - Top - FontSize),
                 W = stateElements.Max(s => s.X + s.W) + Left,
                 H = transitionElements.Max(t => t.Y + t.H) + Top + FontSize
             };
