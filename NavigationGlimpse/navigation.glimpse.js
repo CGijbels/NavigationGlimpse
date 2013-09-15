@@ -206,7 +206,9 @@
             args.pluginData.data = 'Loading data, please wait...';
         },
         postrender = function (args) {
-            navigation.data = args.pluginData._data;
+            args.pluginData.data = args.pluginData._data;
+            args.pluginData._data = null;
+            navigation.data = args.pluginData.data;
             navigation.states = navigation.data.states;
             navigation.transitions = navigation.data.transitions;
             navigation.x = navigation.data.x;
@@ -214,7 +216,6 @@
             navigation.w = navigation.data.w;
             navigation.h = navigation.data.h;
             navigation.scope = args.panel;
-            args.pluginData.data = 'Loading data, please wait...';
             pubsub.publishAsync('trigger.navigation.init');
         };
         pubsub.subscribe('trigger.navigation.init', init);
