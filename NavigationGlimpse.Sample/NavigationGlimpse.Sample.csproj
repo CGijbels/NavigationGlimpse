@@ -74,6 +74,8 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Custom2Data.cs" />
+    <Compile Include="Custom2DataTypeConverter.cs" />
     <Compile Include="CustomData.cs" />
     <Compile Include="CustomDataTypeConverter.cs" />
     <Compile Include="GlimpseSecurityPolicy.cs" />

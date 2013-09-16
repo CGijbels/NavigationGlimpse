@@ -11,8 +11,8 @@
 	<asp:ScriptManager ID="ScriptManager1" runat="server" EnablePartialRendering="true" />
 	<asp:UpdatePanel ID="UpdatePanel1" runat="server">
 		<ContentTemplate>
-			<asp:HyperLink runat="server" NavigateUrl="{RefreshLink dateOfBirth?datetime=1980/10/4}" Text="Refresh" />
-			<asp:HyperLink runat="server" NavigateUrl="{NavigationLink Next,name=Bob}" Text="Next" />
+			<asp:HyperLink runat="server" NavigateUrl="{RefreshLink &dateOfBirth?datetime=1980/10/4}" Text="Refresh" />
+			<asp:HyperLink runat="server" NavigateUrl="{NavigationLink* Next,name=Bob}" Text="Next" />
 			<asp:HyperLink runat="server" NavigateUrl="{NavigationLink Sample,age=19}" Text="Sample" />
 			<asp:HyperLink runat="server" NavigateUrl="{NavigationLink Sample2,name=Brenda}" Text="Sample2" />
 			<asp:HyperLink runat="server" NavigateUrl="{NavigationLink Sample3}" Text="Sample3" />

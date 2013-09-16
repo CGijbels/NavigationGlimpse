@@ -169,8 +169,10 @@
             },
             convertDictionary = function (dictionary) {
                 var arr = [];
-                for (var key in dictionary)
-                    arr.push(key + '=' + dictionary[key]);
+                for (var key in dictionary) {
+                    var val = dictionary[key];
+                    arr.push(key + '=' + (JSON && JSON.stringify && $.isPlainObject(val) ? JSON.stringify(val) : val));
+                }
                 return arr.join(', ');
             },
             processTransitions = function (context, transitions, font) {
