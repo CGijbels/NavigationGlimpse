@@ -12,7 +12,7 @@ namespace NavigationGlimpse.Sample
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            StateContext.Bag.CustomData = new CustomData();
         }
 
         protected void Button_Click(object sender, EventArgs e)

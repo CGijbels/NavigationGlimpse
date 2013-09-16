@@ -74,6 +74,8 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CustomData.cs" />
+    <Compile Include="CustomDataTypeConverter.cs" />
     <Compile Include="GlimpseSecurityPolicy.cs" />
     <Compile Include="Page1.aspx.cs">
       <DependentUpon>Page1.aspx</DependentUpon>
