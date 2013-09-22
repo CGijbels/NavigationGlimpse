@@ -13,6 +13,7 @@ namespace NavigationGlimpse
             return new
             {
                 stateEl.State.Key,
+                stateEl.State.Index,
                 stateEl.X,
                 stateEl.Y,
                 stateEl.W,

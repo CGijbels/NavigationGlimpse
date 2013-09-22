@@ -125,6 +125,11 @@
             processStates = function (context, states, font) {
                 for (var i = 0; i < states.length; i++) {
                     var state = states[i];
+                    if (state.index === 0) {
+                        context.font = '14px ' + font;
+                        context.textAlign = 'left';
+                        context.fillText(state.dialogKey, state.x + 10, state.y - 5, 2 * state.w);
+                    }
                     context.save();
                     context.fillStyle = '#fff';
                     if (state.selected) {

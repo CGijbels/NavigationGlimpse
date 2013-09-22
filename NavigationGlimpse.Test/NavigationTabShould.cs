@@ -106,9 +106,9 @@ namespace NavigationGlimpse.Test
         }
 
         [TestMethod]
-        public void SetYTo10ForAllDialog1States()
+        public void SetYTo25ForAllDialog1States()
         {
-            var states = StateElements.Where(s => s.State.Parent.Key == "D1" && s.Y != 10);
+            var states = StateElements.Where(s => s.State.Parent.Key == "D1" && s.Y != 25);
             Assert.AreEqual(0, states.Count());
         }
 
@@ -163,9 +163,9 @@ namespace NavigationGlimpse.Test
         }
 
         [TestMethod]
-        public void SetYTo60ForAllDialog1Transitions()
+        public void SetYTo75ForAllDialog1Transitions()
         {
-            var trans = TransitionElements.Where(t => t.Transition.Parent.Parent.Key == "D1" && t.Y != 60);
+            var trans = TransitionElements.Where(t => t.Transition.Parent.Parent.Key == "D1" && t.Y != 75);
             Assert.AreEqual(0, trans.Count());
         }
     }

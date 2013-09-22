@@ -7,7 +7,7 @@ namespace NavigationGlimpse
 {
     internal class Canvas
     {
-        private const int Top = 10;
+        private const int Top = 25;
         private const int Left = 10;
         private const int Width = 750;
         private const int Height = 275;
@@ -16,9 +16,9 @@ namespace NavigationGlimpse
         private const int StateSeparation = 40;
         private const int TransitionSeparation = 20;
         private const int TransitionStepHeight = 20;
-        private const int DialogSeparation = 20;
-        private const int FontSize = 12;
-        private const int StatePadding = 10;
+        private const int FontSize = 15;
+        private const int PaddingX = 10;
+        private const int PaddingY = 5;
 
         internal static CanvasData Arrange(StateDisplayInfo stateDisplayInfo)
         {
@@ -68,7 +68,7 @@ namespace NavigationGlimpse
                     stateElement.W = ProcessTransitions(stateElement, transitionElements);
                     stateX += stateElement.W + StateSeparation;
                 }
-                stateY += Top + StateHeight + depths.Count * TransitionStepHeight + DialogSeparation;
+                stateY += Top + StateHeight + depths.Count * TransitionStepHeight + FontSize;
             }
             var selected = stateElements.First(s => s.Current);
             var selectedDialogTrans = transitionElements.Where(t => t.Transition.Parent.Parent == selected.State.Parent);
@@ -77,9 +77,9 @@ namespace NavigationGlimpse
                 States = stateElements,
                 Transitions = transitionElements,
                 X = Math.Min(0, Width - (selected.X + selected.W + Left)),
-                Y = Math.Min(0, Height - Math.Min(selectedDialogTrans.Max(t => t.Y + t.H) + Top + FontSize, selected.Y + Height - Top)),
+                Y = Math.Min(0, Height - Math.Min(selectedDialogTrans.Max(t => t.Y + t.H) + PaddingY + FontSize, selected.Y + Height - Top)),
                 W = stateElements.Max(s => s.X + s.W) + Left,
-                H = transitionElements.Max(t => t.Y + t.H) + Top + FontSize
+                H = transitionElements.Max(t => t.Y + t.H) + PaddingY + FontSize
             };
         }
 
@@ -119,7 +119,7 @@ namespace NavigationGlimpse
         {
             var trans = TransByState(stateElement.State, transEls);
             var transWidth = (trans.Count() - 1) * TransitionSeparation;
-            var width = StateWidth + Math.Max(0, transWidth + 2 * StatePadding - StateWidth);
+            var width = StateWidth + Math.Max(0, transWidth + 2 * PaddingX - StateWidth);
             var start = stateElement.X + (width - transWidth) / 2;
             foreach (var transEl in trans)
             {
