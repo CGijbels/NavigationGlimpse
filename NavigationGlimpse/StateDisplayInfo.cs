@@ -8,6 +8,8 @@ namespace NavigationGlimpse
 
         internal string Route { get; set; }
 
+        internal string Theme { get; set; }
+
         internal List<string> Masters { get; set; }
     }
 }

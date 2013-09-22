@@ -41,6 +41,7 @@ namespace NavigationGlimpse
                     stateElement.H = StateHeight;
                     stateElement.Page = state.Page;
                     stateElement.Route = state.Route;
+                    stateElement.Theme = state.Theme;
                     stateElement.Masters = state.Masters.ToList();
                     if (state == StateContext.State)
                     {
@@ -48,6 +49,7 @@ namespace NavigationGlimpse
                         stateElement.Data = StateContext.Data;
                         stateElement.Page = stateDisplayInfo.Page;
                         stateElement.Route = stateDisplayInfo.Route;
+                        stateElement.Theme = stateDisplayInfo.Theme;
                         stateElement.Masters = stateDisplayInfo.Masters;
                     }
                     stateElement.Previous = state == StateContext.PreviousState;

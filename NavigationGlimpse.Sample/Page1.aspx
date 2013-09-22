@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Page1.aspx.cs" Inherits="NavigationGlimpse.Sample.Page1" MasterPageFile="~/Master1.Master" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="Page1.aspx.cs" Inherits="NavigationGlimpse.Sample.Page1" MasterPageFile="~/Master1.Master" Theme="Theme" %>
 <%@ Register assembly="Navigation" namespace="Navigation" tagprefix="nav" %>
 <asp:Content ID="Main" runat="server" ContentPlaceHolderID="Content">
 	<asp:ScriptManager ID="ScriptManager1" runat="server" EnablePartialRendering="true" />

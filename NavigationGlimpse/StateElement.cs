@@ -32,6 +32,8 @@ namespace NavigationGlimpse
 
         public string Route { get; set; }
 
+        public string Theme { get; set; }
+
         public List<string> Masters { get; set; }
     }
 }

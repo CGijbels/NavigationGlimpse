@@ -20,6 +20,7 @@ namespace NavigationGlimpse
             {
                 Page = GetCurrentPage(context, mobile),
                 Route = GetCurrentRoute(mobile),
+                Theme = GetCurrentTheme(context, mobile),
                 Masters = GetCurrentMasters(context, mobile)
             });
         }
@@ -42,6 +43,21 @@ namespace NavigationGlimpse
         {
             return (!mobile || (StateContext.State.MobilePage.Length == 0 && StateContext.State.MobileRoute.Length == 0)) ? 
                 StateContext.State.Route : StateContext.State.MobileRoute;
+        }
+
+        private string GetCurrentTheme(ITabContext context, bool mobile)
+        {
+            string theme = null;
+            var getDisplayInfoForThemeMessage = context.GetMessages<StateRouteHandler.GetDisplayInfoForTheme.Message>().FirstOrDefault();
+            var getThemeForDisplayInfoMessage = context.GetMessages<StateRouteHandler.GetThemeForDisplayInfo.Message>().FirstOrDefault();
+            if (getDisplayInfoForThemeMessage != null)
+                theme = getDisplayInfoForThemeMessage.Theme;
+            if (getThemeForDisplayInfoMessage != null)
+                theme = getThemeForDisplayInfoMessage.Theme;
+            if (theme == null)
+                theme = (!mobile || (StateContext.State.MobilePage.Length == 0 && StateContext.State.MobileTheme.Length == 0)) ? 
+                    StateContext.State.Theme : StateContext.State.MobileTheme;
+            return theme;
         }
 
         private List<string> GetCurrentMasters(ITabContext context, bool mobile)

@@ -26,7 +26,7 @@ namespace NavigationGlimpse
                 stateEl.Page,
                 stateEl.State.Title,
                 stateEl.Route,
-                stateEl.State.Theme,
+                stateEl.Theme,
                 stateEl.Masters,
                 DefaultTypes = GetDictionary<Type>(stateEl.State.DefaultTypes),
                 stateEl.State.Derived,
