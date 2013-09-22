@@ -40,6 +40,14 @@ namespace NavigationGlimpse.Test
                     new List<StateRouteHandler.GetDisplayInfoForPage.Message>());
                 ShimTabContextExtensions.GetMessagesOf1ITabContext<StateRouteHandler.GetPageForDisplayInfo.Message>(t =>
                     new List<StateRouteHandler.GetPageForDisplayInfo.Message>());
+                ShimTabContextExtensions.GetMessagesOf1ITabContext<StateRouteHandler.GetDisplayInfoForTheme.Message>(t =>
+                    new List<StateRouteHandler.GetDisplayInfoForTheme.Message>());
+                ShimTabContextExtensions.GetMessagesOf1ITabContext<StateRouteHandler.GetThemeForDisplayInfo.Message>(t =>
+                    new List<StateRouteHandler.GetThemeForDisplayInfo.Message>());
+                ShimTabContextExtensions.GetMessagesOf1ITabContext<StateRouteHandler.GetDisplayInfoForMaster.Message>(t =>
+                    new List<StateRouteHandler.GetDisplayInfoForMaster.Message>());
+                ShimTabContextExtensions.GetMessagesOf1ITabContext<StateRouteHandler.GetMasterForDisplayInfo.Message>(t =>
+                    new List<StateRouteHandler.GetMasterForDisplayInfo.Message>());
                 var elements = (CanvasData)new NavigationTab().GetData(tabContext);
                 StateElements = elements.States;
                 TransitionElements = elements.Transitions;
