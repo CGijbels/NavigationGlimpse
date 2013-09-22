@@ -62,6 +62,10 @@ namespace NavigationGlimpse
         {
             context.PersistMessages<StateRouteHandler.GetDisplayInfoForPage.Message>();
             context.PersistMessages<StateRouteHandler.GetPageForDisplayInfo.Message>();
+            context.PersistMessages<StateRouteHandler.GetDisplayInfoForMaster.Message>();
+            context.PersistMessages<StateRouteHandler.GetMasterForDisplayInfo.Message>();
+            context.PersistMessages<StateRouteHandler.GetDisplayInfoForTheme.Message>();
+            context.PersistMessages<StateRouteHandler.GetThemeForDisplayInfo.Message>();
         }
     }
 }

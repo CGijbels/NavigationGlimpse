@@ -97,6 +97,22 @@ namespace NavigationGlimpse
 
             public override void PostImplementation(IAlternateMethodContext context, TimerResult timerResult)
             {
+                var displayInfo = context.ReturnValue as DisplayInfo;
+                var message = new Message(displayInfo.DisplayMode.DisplayModeId, displayInfo.FilePath);
+                context.MessageBroker.Publish(message);
+            }
+
+            public class Message : MessageBase
+            {
+                public Message(string displayMode, string master)
+                {
+                    DisplayMode = displayMode;
+                    Master = master;
+                }
+
+                public string DisplayMode { get; set; }
+
+                public string Master { get; set; }
             }
         }
 
@@ -109,6 +125,23 @@ namespace NavigationGlimpse
 
             public override void PostImplementation(IAlternateMethodContext context, TimerResult timerResult)
             {
+                var displayInfo = context.Arguments[0] as DisplayInfo;
+                var master = context.ReturnValue as string;
+                var message = new Message(displayInfo.DisplayMode.DisplayModeId, master);
+                context.MessageBroker.Publish(message);
+            }
+
+            public class Message : MessageBase
+            {
+                public Message(string displayMode, string master)
+                {
+                    DisplayMode = displayMode;
+                    Master = master;
+                }
+
+                public string DisplayMode { get; set; }
+
+                public string Master { get; set; }
             }
         }
 
@@ -121,6 +154,22 @@ namespace NavigationGlimpse
 
             public override void PostImplementation(IAlternateMethodContext context, TimerResult timerResult)
             {
+                var displayInfo = context.ReturnValue as DisplayInfo;
+                var message = new Message(displayInfo.DisplayMode.DisplayModeId, displayInfo.FilePath);
+                context.MessageBroker.Publish(message);
+            }
+
+            public class Message : MessageBase
+            {
+                public Message(string displayMode, string theme)
+                {
+                    DisplayMode = displayMode;
+                    Theme = theme;
+                }
+
+                public string DisplayMode { get; set; }
+
+                public string Theme { get; set; }
             }
         }
 
@@ -133,6 +182,23 @@ namespace NavigationGlimpse
 
             public override void PostImplementation(IAlternateMethodContext context, TimerResult timerResult)
             {
+                var displayInfo = context.Arguments[0] as DisplayInfo;
+                var theme = context.ReturnValue as string;
+                var message = new Message(displayInfo.DisplayMode.DisplayModeId, theme);
+                context.MessageBroker.Publish(message);
+            }
+
+            public class Message : MessageBase
+            {
+                public Message(string displayMode, string theme)
+                {
+                    DisplayMode = displayMode;
+                    Theme = theme;
+                }
+
+                public string DisplayMode { get; set; }
+
+                public string Theme { get; set; }
             }
         }
     }
