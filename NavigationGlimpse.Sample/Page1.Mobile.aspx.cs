@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+﻿using Navigation;
+using System;
 
 namespace NavigationGlimpse.Sample
 {
@@ -11,6 +7,7 @@ namespace NavigationGlimpse.Sample
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            StateContext.Bag.Custom2Data = null;
 
         }
     }
