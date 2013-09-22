@@ -79,6 +79,27 @@
     <Compile Include="CustomData.cs" />
     <Compile Include="CustomDataTypeConverter.cs" />
     <Compile Include="GlimpseSecurityPolicy.cs" />
+    <Compile Include="Master1.Master.cs">
+      <DependentUpon>Master1.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Master1.Master.designer.cs">
+      <DependentUpon>Master1.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Master1.Mobile.Master.cs">
+      <DependentUpon>Master1.Mobile.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Master1.Mobile.Master.designer.cs">
+      <DependentUpon>Master1.Mobile.Master</DependentUpon>
+    </Compile>
+    <Compile Include="NestedMaster1.Mobile.Master.cs">
+      <DependentUpon>NestedMaster1.Mobile.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="NestedMaster1.Mobile.Master.designer.cs">
+      <DependentUpon>NestedMaster1.Mobile.Master</DependentUpon>
+    </Compile>
     <Compile Include="Page1.aspx.cs">
       <DependentUpon>Page1.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -108,6 +129,9 @@
       <SubType>Designer</SubType>
     </Content>
     <Content Include="App_Browsers\Navigation.browser" />
+    <Content Include="Master1.Mobile.Master" />
+    <Content Include="Master1.Master" />
+    <Content Include="NestedMaster1.Mobile.Master" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

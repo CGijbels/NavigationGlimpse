@@ -1,4 +1,5 @@
 ﻿using Navigation;
+using System.Collections.Generic;
 
 namespace NavigationGlimpse
 {
@@ -28,5 +29,9 @@ namespace NavigationGlimpse
         public NavigationData Data { get; set; }
 
         public string Page { get; set; }
+
+        public string Route { get; set; }
+
+        public List<string> Masters { get; set; }
     }
 }

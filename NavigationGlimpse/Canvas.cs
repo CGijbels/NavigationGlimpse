@@ -40,11 +40,15 @@ namespace NavigationGlimpse
                     stateElement.Y = stateY;
                     stateElement.H = StateHeight;
                     stateElement.Page = state.Page;
+                    stateElement.Route = state.Route;
+                    stateElement.Masters = state.Masters.ToList();
                     if (state == StateContext.State)
                     {
                         stateElement.Current = state == StateContext.State;
                         stateElement.Data = StateContext.Data;
                         stateElement.Page = stateDisplayInfo.Page;
+                        stateElement.Route = stateDisplayInfo.Route;
+                        stateElement.Masters = stateDisplayInfo.Masters;
                     }
                     stateElement.Previous = state == StateContext.PreviousState;
                     stateElement.Back = 0;

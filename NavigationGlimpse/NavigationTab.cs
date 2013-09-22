@@ -2,6 +2,7 @@
 using Glimpse.Core.Extensions;
 using Navigation;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.WebPages;
@@ -18,7 +19,8 @@ namespace NavigationGlimpse
             return Canvas.Arrange(new StateDisplayInfo
             {
                 Page = GetCurrentPage(context, mobile),
-                Route = GetCurrentRoute(mobile)
+                Route = GetCurrentRoute(mobile),
+                Masters = GetCurrentMasters(context, mobile)
             });
         }
 
@@ -32,14 +34,29 @@ namespace NavigationGlimpse
             if (getPageForDisplayInfoMessage != null)
                 page = getPageForDisplayInfoMessage.Page;
             if (page == null)
-                page = !mobile || StateContext.State.MobilePage.Length == 0 ? StateContext.State.Page : StateContext.State.MobilePage;
+                page = (!mobile || StateContext.State.MobilePage.Length == 0) ? StateContext.State.Page : StateContext.State.MobilePage;
             return page;
         }
 
         private string GetCurrentRoute(bool mobile)
         {
-            return !mobile || (StateContext.State.MobilePage.Length == 0 && StateContext.State.MobileRoute.Length == 0) ? 
+            return (!mobile || (StateContext.State.MobilePage.Length == 0 && StateContext.State.MobileRoute.Length == 0)) ? 
                 StateContext.State.Route : StateContext.State.MobileRoute;
+        }
+
+        private List<string> GetCurrentMasters(ITabContext context, bool mobile)
+        {
+            var masters = new List<string>();
+            var getDisplayInfoForMasterMessages = context.GetMessages<StateRouteHandler.GetDisplayInfoForMaster.Message>();
+            var getMasterForDisplayInfoMessages = context.GetMessages<StateRouteHandler.GetMasterForDisplayInfo.Message>();
+            foreach (var getDisplayInfoForMasterMessage in getDisplayInfoForMasterMessages)
+                masters.Add(getDisplayInfoForMasterMessage.Master);
+            foreach (var getMasterForDisplayInfoMessage in getMasterForDisplayInfoMessages)
+                masters.Add(getMasterForDisplayInfoMessage.Master);
+            if (masters.Count == 0)
+                masters = ((!mobile || (StateContext.State.MobilePage.Length == 0 && StateContext.State.MobileMasters.Count == 0)) ? 
+                    StateContext.State.Masters : StateContext.State.MobileMasters).ToList();
+            return masters;
         }
 
         public override string Name

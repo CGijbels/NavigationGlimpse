@@ -1,0 +1,5 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/Master1.Mobile.Master" AutoEventWireup="true" CodeBehind="NestedMaster1.Mobile.master.cs" Inherits="NavigationGlimpse.Sample.NestedMaster1_Mobile" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="Content" runat="server">
+	<asp:ContentPlaceHolder ID="Content" runat="server">
+    </asp:ContentPlaceHolder>
+</asp:Content>

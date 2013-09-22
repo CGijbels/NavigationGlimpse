@@ -22,20 +22,16 @@ namespace NavigationGlimpse
                 stateEl.Back,
                 Selected = stateEl.Current,
                 DialogKey = stateEl.State.Parent.Key,
+                Data = GetDictionary(stateEl.Data),
                 stateEl.Page,
                 stateEl.State.Title,
-                stateEl.State.Route,
-                Data = GetDictionary(stateEl.Data),
+                stateEl.Route,
+                stateEl.State.Theme,
+                stateEl.Masters,
                 DefaultTypes = GetDictionary<Type>(stateEl.State.DefaultTypes),
                 stateEl.State.Derived,
                 stateEl.State.TrackCrumbTrail,
                 stateEl.State.CheckPhysicalUrlAccess,
-                stateEl.State.Theme,
-                stateEl.State.Masters,
-                stateEl.State.MobilePage,
-                stateEl.State.MobileRoute,
-                stateEl.State.MobileTheme,
-                stateEl.State.MobileMasters
             };
         }
 
