@@ -356,8 +356,9 @@ namespace NavigationGlimpse.Test
         {
             Assert.AreEqual(20, GetTransition("D2.S8.T1").H);
         }
+
         [TestMethod]
-        public void SetX1To1435ForDoubleSelfAndSelfTransition2FromDialog2State8()
+        public void SetX1To1435ForDoubleSelfAndFromTransition2FromDialog2State8()
         {
             Assert.AreEqual(1435, GetTransition("D2.S8.T2").X1);
         }
@@ -374,6 +375,41 @@ namespace NavigationGlimpse.Test
             Assert.AreEqual(20, GetTransition("D2.S8.T2").H);
         }
 
+        [TestMethod]
+        public void SetX1To1815ForDoubleFromAndSelfTransition1FromDialog2State10()
+        {
+            Assert.AreEqual(1815, GetTransition("D2.S10.T1").X1);
+        }
+
+        [TestMethod]
+        public void SetX2To1985ForDoubleFromAndSelfTransition1ToDialog2State11()
+        {
+            Assert.AreEqual(1985, GetTransition("D2.S10.T1").X2);
+        }
+
+        [TestMethod]
+        public void SetHTo20ForDoubleFromAndSelfTransition1FromDialog2State10()
+        {
+            Assert.AreEqual(20, GetTransition("D2.S10.T1").H);
+        }
+
+        [TestMethod]
+        public void SetX1To1775ForDoubleFromAndSelfTransition2FromDialog2State10()
+        {
+            Assert.AreEqual(1775, GetTransition("D2.S10.T2").X1);
+        }
+
+        [TestMethod]
+        public void SetX2To1795ForDoubleFromAndSelfTransition2ToDialog2State10()
+        {
+            Assert.AreEqual(1795, GetTransition("D2.S10.T2").X2);
+        }
+
+        [TestMethod]
+        public void SetHTo20ForDoubleFromAndSelfTransition2FromDialog2State10()
+        {
+            Assert.AreEqual(20, GetTransition("D2.S10.T2").H);
+        }
         [TestMethod]
         public void SetYTo185ForAllDialog2Transitions()
         {
