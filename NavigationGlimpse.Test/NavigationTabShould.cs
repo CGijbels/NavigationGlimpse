@@ -196,13 +196,6 @@ namespace NavigationGlimpse.Test
         }
 
         [TestMethod]
-        public void SetYTo185ForAllDialog2Transitions()
-        {
-            var trans = TransitionElements.Where(t => t.Transition.Parent.Parent.Key == "D2" && t.Y != 185);
-            Assert.AreEqual(0, trans.Count());
-        }
-
-        [TestMethod]
         public void SetX1To85ForDoubleTransition1FromDialog2State1()
         {
             Assert.AreEqual(95, GetTransition("D2.S1.T1").X1);
@@ -221,9 +214,10 @@ namespace NavigationGlimpse.Test
         }
 
         [TestMethod]
-        public void SetYTo235ForDoubleTransition1FromDialog2State1()
+        public void SetYTo185ForAllDialog2Transitions()
         {
-            Assert.AreEqual(235, GetTransition("D2.S1.T1").Y);
+            var trans = TransitionElements.Where(t => t.Transition.Parent.Parent.Key == "D2" && t.Y != 185);
+            Assert.AreEqual(0, trans.Count());
         }
     }
 }
