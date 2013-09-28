@@ -338,6 +338,42 @@ namespace NavigationGlimpse.Test
         {
             Assert.AreEqual(40, GetTransition("D2.S7.T1").H);
         }
+
+        [TestMethod]
+        public void SetX1To1395ForDoubleSelfAndSelfTransition1FromDialog2State8()
+        {
+            Assert.AreEqual(1395, GetTransition("D2.S8.T1").X1);
+        }
+
+        [TestMethod]
+        public void SetX2To1415ForDoubleSelfAndFromTransition1ToDialog2State8()
+        {
+            Assert.AreEqual(1415, GetTransition("D2.S8.T1").X2);
+        }
+
+        [TestMethod]
+        public void SetHTo20ForDoubleSelfAndFromTransition1FromDialog2State8()
+        {
+            Assert.AreEqual(20, GetTransition("D2.S8.T1").H);
+        }
+        [TestMethod]
+        public void SetX1To1435ForDoubleSelfAndSelfTransition2FromDialog2State8()
+        {
+            Assert.AreEqual(1435, GetTransition("D2.S8.T2").X1);
+        }
+
+        [TestMethod]
+        public void SetX2To1605ForDoubleSelfAndFromTransition2ToDialog2State9()
+        {
+            Assert.AreEqual(1605, GetTransition("D2.S8.T2").X2);
+        }
+
+        [TestMethod]
+        public void SetHTo20ForDoubleSelfAndFromTransition2FromDialog2State8()
+        {
+            Assert.AreEqual(20, GetTransition("D2.S8.T2").H);
+        }
+
         [TestMethod]
         public void SetYTo185ForAllDialog2Transitions()
         {
