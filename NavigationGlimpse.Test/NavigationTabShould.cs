@@ -196,21 +196,39 @@ namespace NavigationGlimpse.Test
         }
 
         [TestMethod]
-        public void SetX1To85ForDoubleTransition1FromDialog2State1()
+        public void SetX1To95ForDoubleTransition1FromDialog2State1()
         {
             Assert.AreEqual(95, GetTransition("D2.S1.T1").X1);
         }
 
         [TestMethod]
-        public void SetX2To255ForDoubleTransition1ToDialog2State2()
+        public void SetX2To265ForDoubleTransition1ToDialog2State2()
         {
             Assert.AreEqual(265, GetTransition("D2.S1.T1").X2);
         }
 
         [TestMethod]
-        public void SetHTo20ForDoubleTransition1FromDialog2State1()
+        public void SetHTo20ForDoubleTransition2FromDialog2State1()
         {
             Assert.AreEqual(20, GetTransition("D2.S1.T1").H);
+        }
+
+        [TestMethod]
+        public void SetX1To75ForDoubleTransition2FromDialog2State1()
+        {
+            Assert.AreEqual(75, GetTransition("D2.S1.T2").X1);
+        }
+
+        [TestMethod]
+        public void SetX2To285ForDoubleTransition2ToDialog2State2()
+        {
+            Assert.AreEqual(285, GetTransition("D2.S1.T2").X2);
+        }
+
+        [TestMethod]
+        public void SetHTo40ForDoubleTransition2FromDialog2State1()
+        {
+            Assert.AreEqual(40, GetTransition("D2.S1.T2").H);
         }
 
         [TestMethod]
