@@ -88,19 +88,19 @@ namespace NavigationGlimpse.Test
         }
 
         [TestMethod]
-        public void SetXTo10ForState1()
+        public void SetXTo10ForDialog1State1()
         {
             Assert.AreEqual(10, GetState("D1.S1").X);
         }
 
         [TestMethod]
-        public void SetXTo200ForState2()
+        public void SetXTo200ForDialog1State2()
         {
             Assert.AreEqual(200, GetState("D1.S2").X);
         }
 
         [TestMethod]
-        public void SetXTo390ForState2()
+        public void SetXTo390ForDialog1State3()
         {
             Assert.AreEqual(390, GetState("D1.S3").X);
         }
@@ -127,37 +127,37 @@ namespace NavigationGlimpse.Test
         }
 
         [TestMethod]
-        public void SetX1To85ForSingleTransitionFromState1()
+        public void SetX1To85ForSingleTransitionFromDialog1State1()
         {
             Assert.AreEqual(85, GetTransition("D1.S1.T1").X1);
         }
 
         [TestMethod]
-        public void SetX2To275ForSingleTransitionToState2()
+        public void SetX2To275ForSingleTransitionToDialog1State2()
         {
             Assert.AreEqual(275, GetTransition("D1.S1.T1").X2);
         }
 
         [TestMethod]
-        public void SetX1To455ForSingleSelfTransitionFromState3()
+        public void SetX1To455ForSingleSelfTransitionFromDialog1State3()
         {
             Assert.AreEqual(455, GetTransition("D1.S3.T1").X1);
         }
 
         [TestMethod]
-        public void SetX2To475ForSingleSelfTransitionToState3()
+        public void SetX2To475ForSingleSelfTransitionToDialog1State3()
         {
             Assert.AreEqual(475, GetTransition("D1.S3.T1").X2);
         }
 
         [TestMethod]
-        public void SetX1To845ForSingleBackTransitionFromState5()
+        public void SetX1To845ForSingleBackTransitionFromDialog1State5()
         {
             Assert.AreEqual(845, GetTransition("D1.S5.T1").X1);
         }
 
         [TestMethod]
-        public void SetX2To655ForSingleBackTransitionToState4()
+        public void SetX2To655ForSingleBackTransitionToDialog1State4()
         {
             Assert.AreEqual(655, GetTransition("D1.S5.T1").X2);
         }
@@ -173,6 +173,32 @@ namespace NavigationGlimpse.Test
         public void SetYTo75ForAllDialog1Transitions()
         {
             var trans = TransitionElements.Where(t => t.Transition.Parent.Parent.Key == "D1" && t.Y != 75);
+            Assert.AreEqual(0, trans.Count());
+        }
+
+        [TestMethod]
+        public void SetXTo10ForDialog2State1()
+        {
+            Assert.AreEqual(10, GetState("D2.S1").X);
+        }
+
+        [TestMethod]
+        public void SetXTo200ForDialog2State2()
+        {
+            Assert.AreEqual(200, GetState("D2.S2").X);
+        }
+
+        [TestMethod]
+        public void SetYTo135ForAllDialog2States()
+        {
+            var states = StateElements.Where(s => s.State.Parent.Key == "D2" && s.Y != 135);
+            Assert.AreEqual(0, states.Count());
+        }
+
+        [TestMethod]
+        public void SetYTo185ForAllDialog2Transitions()
+        {
+            var trans = TransitionElements.Where(t => t.Transition.Parent.Parent.Key == "D2" && t.Y != 185);
             Assert.AreEqual(0, trans.Count());
         }
     }
