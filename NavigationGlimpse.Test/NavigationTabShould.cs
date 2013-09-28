@@ -304,6 +304,41 @@ namespace NavigationGlimpse.Test
         }
 
         [TestMethod]
+        public void SetX1To1045ForDoubleFromAndToTransition1FromDialog2State6()
+        {
+            Assert.AreEqual(1045, GetTransition("D2.S6.T1").X1);
+        }
+
+        [TestMethod]
+        public void SetX2To1215ForDoubleFromAndToTransition1ToDialog2State7()
+        {
+            Assert.AreEqual(1215, GetTransition("D2.S6.T1").X2);
+        }
+
+        [TestMethod]
+        public void SetHTo20ForDoubleFromAndToTransition1FromDialog2State6()
+        {
+            Assert.AreEqual(20, GetTransition("D2.S6.T1").H);
+        }
+
+        [TestMethod]
+        public void SetX1To1235ForDoubleFromAndToTransition1FromDialog2State7()
+        {
+            Assert.AreEqual(1235, GetTransition("D2.S7.T1").X1);
+        }
+
+        [TestMethod]
+        public void SetX2To1025ForDoubleFromAndToTransition1ToDialog2State6()
+        {
+            Assert.AreEqual(1025, GetTransition("D2.S7.T1").X2);
+        }
+
+        [TestMethod]
+        public void SetHTo40ForDoubleFromAndToTransition1FromDialog2State7()
+        {
+            Assert.AreEqual(40, GetTransition("D2.S7.T1").H);
+        }
+        [TestMethod]
         public void SetYTo185ForAllDialog2Transitions()
         {
             var trans = TransitionElements.Where(t => t.Transition.Parent.Parent.Key == "D2" && t.Y != 185);
