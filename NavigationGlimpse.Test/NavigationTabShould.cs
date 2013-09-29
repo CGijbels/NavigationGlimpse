@@ -556,5 +556,59 @@ namespace NavigationGlimpse.Test
         {
             Assert.AreEqual(20, GetTransition("D4.S2.T2").H);
         }
+
+        [TestMethod]
+        public void SetX1To105ForTransition1OfS1S3_S3S1_S3S1()
+        {
+            Assert.AreEqual(105, GetTransition("D5.S1.T1").X1);
+        }
+
+        [TestMethod]
+        public void SetX2To445ForTransition1OfS1S3_S3S1_S3S1()
+        {
+            Assert.AreEqual(445, GetTransition("D5.S1.T1").X2);
+        }
+
+        [TestMethod]
+        public void SetHTo20ForTransition1OfS1S3_S3S1_S3S1()
+        {
+            Assert.AreEqual(20, GetTransition("D5.S1.T1").H);
+        }
+
+        [TestMethod]
+        public void SetX1To465ForTransition2OfS1S3_S3S1_S3S1()
+        {
+            Assert.AreEqual(465, GetTransition("D5.S3.T1").X1);
+        }
+
+        [TestMethod]
+        public void SetX2To85ForTransition2OfS1S3_S3S1_S3S1()
+        {
+            Assert.AreEqual(85, GetTransition("D5.S3.T1").X2);
+        }
+
+        [TestMethod]
+        public void SetHTo40ForTransition2OfS1S3_S3S1_S3S1()
+        {
+            Assert.AreEqual(40, GetTransition("D5.S3.T1").H);
+        }
+
+        [TestMethod]
+        public void SetX1To485ForTransition3OfS1S3_S3S1_S3S1()
+        {
+            Assert.AreEqual(485, GetTransition("D5.S3.T2").X1);
+        }
+
+        [TestMethod]
+        public void SetX2To65ForTransition3OfS1S3_S3S1_S3S1()
+        {
+            Assert.AreEqual(65, GetTransition("D5.S3.T2").X2);
+        }
+
+        [TestMethod]
+        public void SetHTo60ForTransition3OfS1S3_S3S1_S3S1()
+        {
+            Assert.AreEqual(60, GetTransition("D5.S3.T2").H);
+        }
     }
 }
