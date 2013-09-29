@@ -768,5 +768,11 @@ namespace NavigationGlimpse.Test
             Assert.AreEqual("a", GetState(states, "D8.S4").Data["s"]);
             Assert.AreEqual(4, GetState(states, "D8.S4").Data["n"]);
         }
+
+        [TestMethod]
+        public void SetWTo2450()
+        {
+            Assert.AreEqual(2450, CanvasData.W);
+        }
     }
 }
