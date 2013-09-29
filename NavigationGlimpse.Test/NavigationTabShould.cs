@@ -454,6 +454,13 @@ namespace NavigationGlimpse.Test
         }
 
         [TestMethod]
+        public void SetYTo265ForAllDialog3States()
+        {
+            var states = StateElements.Where(s => s.State.Parent.Key == "D3" && s.Y != 265);
+            Assert.AreEqual(0, states.Count());
+        }
+
+        [TestMethod]
         public void SetX1To85ForTransition1OfS1S2_S2S2_S3S2()
         {
             Assert.AreEqual(85, GetTransition("D3.S1.T1").X1);
