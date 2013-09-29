@@ -482,6 +482,43 @@ namespace NavigationGlimpse.Test
         {
             Assert.AreEqual(20, GetTransition("D2.S13.T1").H);
         }
+
+        [TestMethod]
+        public void SetX1To2555ForCrossingTransition1FromDialog2State14()
+        {
+            Assert.AreEqual(2555, GetTransition("D2.S14.T1").X1);
+        }
+
+        [TestMethod]
+        public void SetX2To2935ForCrossingTransition1ToDialog2State16()
+        {
+            Assert.AreEqual(2935, GetTransition("D2.S14.T1").X2);
+        }
+
+        [TestMethod]
+        public void SetHTo20ForCrossingTransition1FromDialog2State14()
+        {
+            Assert.AreEqual(20, GetTransition("D2.S14.T1").H);
+        }
+
+        [TestMethod]
+        public void SetX1To2745ForCrossingTransition2FromDialog2State15()
+        {
+            Assert.AreEqual(2745, GetTransition("D2.S15.T1").X1);
+        }
+
+        [TestMethod]
+        public void SetX2To3125ForCrossingTransition2ToDialog2State17()
+        {
+            Assert.AreEqual(3125, GetTransition("D2.S15.T1").X2);
+        }
+
+        [TestMethod]
+        public void SetHTo40ForCrossingTransition2FromDialog2State15()
+        {
+            Assert.AreEqual(40, GetTransition("D2.S15.T1").H);
+        }
+
         [TestMethod]
         public void SetYTo185ForAllDialog2Transitions()
         {
@@ -770,9 +807,9 @@ namespace NavigationGlimpse.Test
         }
 
         [TestMethod]
-        public void SetWTo2450()
+        public void SetWTo3210()
         {
-            Assert.AreEqual(2450, CanvasData.W);
+            Assert.AreEqual(3210, CanvasData.W);
         }
 
         [TestMethod]
