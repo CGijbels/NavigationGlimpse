@@ -661,6 +661,17 @@ namespace NavigationGlimpse.Test
         }
 
         [TestMethod]
+        public void SetState()
+        {
+            Assert.AreEqual(StateInfoConfig.Dialogs[0].States[0], GetState(null, "D1.S1").State);
+        }
+
+        [TestMethod]
+        public void SetTransition()
+        {
+            Assert.AreEqual(StateInfoConfig.Dialogs[0].States[0].Transitions[0], GetTransition("D1.S1.T1").Transition);
+        }
+        [TestMethod]
         public void SetBackForCrumbs()
         {
             StateController.Navigate("D8");
