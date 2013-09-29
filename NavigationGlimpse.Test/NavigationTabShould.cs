@@ -774,5 +774,11 @@ namespace NavigationGlimpse.Test
         {
             Assert.AreEqual(2450, CanvasData.W);
         }
+
+        [TestMethod]
+        public void SetHTo1185()
+        {
+            Assert.AreEqual(1185, CanvasData.H);
+        }
     }
 }
