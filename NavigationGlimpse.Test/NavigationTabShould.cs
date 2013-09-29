@@ -728,5 +728,18 @@ namespace NavigationGlimpse.Test
             Assert.AreEqual("y", GetState(states, "D8.S3").Data["s"]);
             Assert.AreEqual(2, GetState(states, "D8.S3").Data["n"]);
         }
+
+        [TestMethod]
+        public void SetCurrentData()
+        {
+            StateController.Navigate("D8");
+            StateController.Navigate("T1");
+            StateController.Navigate("T1");
+            StateController.Navigate("T1", new NavigationData { { "s", "z" }, { "n", 3 } });
+            var elements = Elements;
+            var states = elements.Item1;
+            Assert.AreEqual("z", GetState(states, "D8.S4").Data["s"]);
+            Assert.AreEqual(3, GetState(states, "D8.S4").Data["n"]);
+        }
     }
 }
