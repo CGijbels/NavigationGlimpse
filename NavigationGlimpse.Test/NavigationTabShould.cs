@@ -452,5 +452,48 @@ namespace NavigationGlimpse.Test
             var trans = TransitionElements.Where(t => t.Transition.Parent.Parent.Key == "D2" && t.Y != 185);
             Assert.AreEqual(0, trans.Count());
         }
+
+        [TestMethod]
+        public void SetX1To85ForTransition1OfS1S2_S2S2_S3S2()
+        {
+            Assert.AreEqual(85, GetTransition("D3.S1.T1").X1);
+        }
+
+        [TestMethod]
+        public void SetX2To245ForTransition1OfS1S2_S2S2_S3S2()
+        {
+            Assert.AreEqual(245, GetTransition("D3.S1.T1").X2);
+        }
+
+        [TestMethod]
+        public void SetX1To265ForTransition2OfS1S2_S2S2_S3S2()
+        {
+            Assert.AreEqual(265, GetTransition("D3.S2.T1").X1);
+        }
+
+        [TestMethod]
+        public void SetX2To285ForTransition2OfS1S2_S2S2_S3S2()
+        {
+            Assert.AreEqual(285, GetTransition("D3.S2.T1").X2);
+        }
+
+        [TestMethod]
+        public void SetX1To465ForTransition3OfS1S2_S2S2_S3S2()
+        {
+            Assert.AreEqual(465, GetTransition("D3.S3.T1").X1);
+        }
+
+        [TestMethod]
+        public void SetX2To305ForTransition3OfS1S2_S2S2_S3S2()
+        {
+            Assert.AreEqual(305, GetTransition("D3.S3.T1").X2);
+        }
+
+        [TestMethod]
+        public void SetHTo20ForAllTransitionsOfS1S2_S2S2_S3S2()
+        {
+            var trans = TransitionElements.Where(t => t.Transition.Parent.Parent.Key == "D3" && t.H != 20);
+            Assert.AreEqual(0, trans.Count());
+        }
     }
 }
