@@ -66,6 +66,30 @@ namespace NavigationGlimpse.Test
             }
         }
 
+        [TestMethod]
+        public void PersistAllDisplayInfoMessages()
+        {
+            var persistMessageCount = 0;
+            using (ShimsContext.Create())
+            {
+                var tabContext = new StubITabSetupContext();
+                ShimTabContextExtensions.
+                    PersistMessagesOf1ITabSetupContext<StateRouteHandler.GetDisplayInfoForPage.Message>(t => persistMessageCount++);
+                ShimTabContextExtensions.
+                    PersistMessagesOf1ITabSetupContext<StateRouteHandler.GetPageForDisplayInfo.Message>(t => persistMessageCount++);
+                ShimTabContextExtensions.
+                    PersistMessagesOf1ITabSetupContext<StateRouteHandler.GetDisplayInfoForMaster.Message>(t => persistMessageCount++);
+                ShimTabContextExtensions.
+                    PersistMessagesOf1ITabSetupContext<StateRouteHandler.GetMasterForDisplayInfo.Message>(t => persistMessageCount++);
+                ShimTabContextExtensions.
+                    PersistMessagesOf1ITabSetupContext<StateRouteHandler.GetDisplayInfoForTheme.Message>(t => persistMessageCount++);
+                ShimTabContextExtensions.
+                    PersistMessagesOf1ITabSetupContext<StateRouteHandler.GetThemeForDisplayInfo.Message>(t => persistMessageCount++);
+                new NavigationTab().Setup(tabContext);
+            }
+            Assert.AreEqual(6, persistMessageCount);
+        }
+
         private static StateElement GetState(IEnumerable<StateElement> stateElements, string statePath)
         {
             var keys = statePath.Split('.');
