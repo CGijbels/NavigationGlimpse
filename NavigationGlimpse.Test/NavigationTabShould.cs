@@ -32,7 +32,6 @@ namespace NavigationGlimpse.Test
             {
                 using (ShimsContext.Create())
                 {
-                    StateController.Navigate("D1");
                     var tabContext = new StubITabContext();
                     var request = new StubHttpRequestBase();
                     request.ItemGetString = k => string.Empty;
@@ -58,6 +57,7 @@ namespace NavigationGlimpse.Test
         [ClassInitialize]
         public static void Initialize(TestContext testContext)
         {
+            StateController.Navigate("D1");
             using (ShimsContext.Create())
             {
                 var elements = Elements;
@@ -66,10 +66,10 @@ namespace NavigationGlimpse.Test
             }
         }
 
-        private static StateElement GetState(string statePath)
+        private static StateElement GetState(IEnumerable<StateElement> stateElements, string statePath)
         {
             var keys = statePath.Split('.');
-            return StateElements.Where(s => s.State.Key == keys[1]
+            return (stateElements ?? StateElements).Where(s => s.State.Key == keys[1]
                 && s.State.Parent.Key == keys[0]).First();
         }
 
@@ -103,19 +103,19 @@ namespace NavigationGlimpse.Test
         [TestMethod]
         public void SetXTo10ForDialog1State1()
         {
-            Assert.AreEqual(10, GetState("D1.S1").X);
+            Assert.AreEqual(10, GetState(null, "D1.S1").X);
         }
 
         [TestMethod]
         public void SetXTo200ForDialog1State2()
         {
-            Assert.AreEqual(200, GetState("D1.S2").X);
+            Assert.AreEqual(200, GetState(null, "D1.S2").X);
         }
 
         [TestMethod]
         public void SetXTo390ForDialog1State3()
         {
-            Assert.AreEqual(390, GetState("D1.S3").X);
+            Assert.AreEqual(390, GetState(null, "D1.S3").X);
         }
 
         [TestMethod]
@@ -192,13 +192,13 @@ namespace NavigationGlimpse.Test
         [TestMethod]
         public void SetXTo10ForDialog2State1()
         {
-            Assert.AreEqual(10, GetState("D2.S1").X);
+            Assert.AreEqual(10, GetState(null, "D2.S1").X);
         }
 
         [TestMethod]
         public void SetXTo200ForDialog2State2()
         {
-            Assert.AreEqual(200, GetState("D2.S2").X);
+            Assert.AreEqual(200, GetState(null, "D2.S2").X);
         }
 
         [TestMethod]
@@ -627,37 +627,65 @@ namespace NavigationGlimpse.Test
         [TestMethod]
         public void WidenStateWTo160For4SelfTransitions()
         {
-            Assert.AreEqual(160, GetState("D6.S1").W);
+            Assert.AreEqual(160, GetState(null, "D6.S1").W);
         }
 
         [TestMethod]
         public void WidenStateWTo180For9Transitions()
         {
-            Assert.AreEqual(180, GetState("D7.S1").W);
+            Assert.AreEqual(180, GetState(null, "D7.S1").W);
         }
 
         [TestMethod]
         public void SetStatePage()
         {
-            Assert.AreEqual("~/P1.aspx", GetState("D1.S1").Page);
+            Assert.AreEqual("~/P1.aspx", GetState(null, "D1.S1").Page);
         }
 
         [TestMethod]
         public void SetStateMasters()
         {
-            Assert.AreEqual("~/M2.master", GetState("D1.S2").Masters[0]);
+            Assert.AreEqual("~/M2.master", GetState(null, "D1.S2").Masters[0]);
         }
 
         [TestMethod]
         public void SetStateRoute()
         {
-            Assert.AreEqual("R3", GetState("D1.S3").Route);
+            Assert.AreEqual("R3", GetState(null, "D1.S3").Route);
         }
 
         [TestMethod]
         public void SetStateTheme()
         {
-            Assert.AreEqual("T4", GetState("D1.S4").Theme);
+            Assert.AreEqual("T4", GetState(null, "D1.S4").Theme);
+        }
+
+        [TestMethod]
+        public void SetBackForCrumbs()
+        {
+            StateController.Navigate("D8");
+            StateController.Navigate("T1");
+            StateController.Navigate("T1");
+            StateController.Navigate("T1");
+            var elements = Elements;
+            var states = elements.Item1;
+            Assert.AreEqual(3, GetState(states, "D8.S1").Back);
+            Assert.AreEqual(2, GetState(states, "D8.S2").Back);
+            Assert.AreEqual(1, GetState(states, "D8.S3").Back);
+            Assert.AreEqual(0, GetState(states, "D8.S4").Back);
+        }
+
+        [TestMethod]
+        public void SetCurrentState()
+        {
+            StateController.Navigate("D8");
+            StateController.Navigate("T1");
+            StateController.Navigate("T1");
+            StateController.Navigate("T1");
+            var elements = Elements;
+            var states = elements.Item1;
+            Assert.IsFalse(GetState(states, "D8.S3").Current);
+            Assert.IsTrue(GetState(states, "D8.S4").Current);
         }
     }
 }
