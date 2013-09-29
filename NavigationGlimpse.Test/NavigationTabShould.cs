@@ -780,5 +780,19 @@ namespace NavigationGlimpse.Test
         {
             Assert.AreEqual(1185, CanvasData.H);
         }
+
+        [TestMethod]
+        public void SetXTo0ForD1()
+        {
+            StateController.Navigate("D1");
+            Assert.AreEqual(0, CanvasData.X);
+        }
+
+        [TestMethod]
+        public void SetYTo0ForD1()
+        {
+            StateController.Navigate("D1");
+            Assert.AreEqual(0, CanvasData.Y);
+        }
     }
 }
