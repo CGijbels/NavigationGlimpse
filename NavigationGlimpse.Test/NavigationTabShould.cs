@@ -776,9 +776,9 @@ namespace NavigationGlimpse.Test
         }
 
         [TestMethod]
-        public void SetHTo1205()
+        public void SetHTo1585()
         {
-            Assert.AreEqual(1205, CanvasData.H);
+            Assert.AreEqual(1585, CanvasData.H);
         }
 
         [TestMethod]
@@ -825,6 +825,18 @@ namespace NavigationGlimpse.Test
             StateController.Navigate("T1");
             StateController.Navigate("T1");
             Assert.AreEqual(-180, CanvasData.X);
+        }
+
+        [TestMethod]
+        public void SetXToNeg950ForD8S6()
+        {
+            StateController.Navigate("D8");
+            StateController.Navigate("T1");
+            StateController.Navigate("T1");
+            StateController.Navigate("T1");
+            StateController.Navigate("T1");
+            StateController.Navigate("T1");
+            Assert.AreEqual(-950, CanvasData.X);
         }
     }
 }
