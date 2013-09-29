@@ -654,9 +654,9 @@ namespace NavigationGlimpse.Test
         }
 
         [TestMethod]
-        public void WidenStateWTo180For9Transitions()
+        public void WidenStateWTo200For9Transitions()
         {
-            Assert.AreEqual(180, GetState(null, "D7.S1").W);
+            Assert.AreEqual(200, GetState(null, "D7.S1").W);
         }
 
         [TestMethod]
@@ -776,9 +776,9 @@ namespace NavigationGlimpse.Test
         }
 
         [TestMethod]
-        public void SetHTo1185()
+        public void SetHTo1205()
         {
-            Assert.AreEqual(1185, CanvasData.H);
+            Assert.AreEqual(1205, CanvasData.H);
         }
 
         [TestMethod]
@@ -807,6 +807,13 @@ namespace NavigationGlimpse.Test
         {
             StateController.Navigate("D3");
             Assert.AreEqual(-80, CanvasData.Y);
+        }
+
+        [TestMethod]
+        public void SetYToNeg800ForD7()
+        {
+            StateController.Navigate("D7");
+            Assert.AreEqual(-800, CanvasData.Y);
         }
     }
 }
