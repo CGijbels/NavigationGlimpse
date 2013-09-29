@@ -794,5 +794,19 @@ namespace NavigationGlimpse.Test
             StateController.Navigate("D1");
             Assert.AreEqual(0, CanvasData.Y);
         }
+
+        [TestMethod]
+        public void SetXTo0ForD3()
+        {
+            StateController.Navigate("D3");
+            Assert.AreEqual(0, CanvasData.X);
+        }
+
+        [TestMethod]
+        public void SetYToNeg80ForD3()
+        {
+            StateController.Navigate("D3");
+            Assert.AreEqual(-80, CanvasData.Y);
+        }
     }
 }
