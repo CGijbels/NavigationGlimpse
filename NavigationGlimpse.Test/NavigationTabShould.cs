@@ -687,6 +687,18 @@ namespace NavigationGlimpse.Test
         }
 
         [TestMethod]
+        public void SetPreviousState()
+        {
+            StateController.Navigate("D8");
+            StateController.Navigate("T1");
+            StateController.Navigate("T1");
+            StateController.Navigate("T1");
+            var elements = Elements;
+            var states = elements.Item1;
+            Assert.IsTrue(GetState(states, "D8.S3").Previous);
+            Assert.IsFalse(GetState(states, "D8.S4").Previous);
+        }
+        [TestMethod]
         public void SetCurrentState()
         {
             StateController.Navigate("D8");
