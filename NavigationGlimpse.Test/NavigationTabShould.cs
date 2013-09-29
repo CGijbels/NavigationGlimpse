@@ -815,5 +815,16 @@ namespace NavigationGlimpse.Test
             StateController.Navigate("D7");
             Assert.AreEqual(-800, CanvasData.Y);
         }
+
+        [TestMethod]
+        public void SetXToNeg180ForD8S5()
+        {
+            StateController.Navigate("D8");
+            StateController.Navigate("T1");
+            StateController.Navigate("T1");
+            StateController.Navigate("T1");
+            StateController.Navigate("T1");
+            Assert.AreEqual(-180, CanvasData.X);
+        }
     }
 }
