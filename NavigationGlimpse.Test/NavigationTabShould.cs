@@ -3,6 +3,7 @@ using Glimpse.Core.Extensions.Fakes;
 using Microsoft.QualityTools.Testing.Fakes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Navigation;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -25,31 +26,43 @@ namespace NavigationGlimpse.Test
             set;
         }
 
+        private static Tuple<List<StateElement>, List<TransitionElement>> Elements
+        {
+            get
+            {
+                using (ShimsContext.Create())
+                {
+                    StateController.Navigate("D1");
+                    var tabContext = new StubITabContext();
+                    var request = new StubHttpRequestBase();
+                    request.ItemGetString = k => string.Empty;
+                    tabContext.GetRequestContextOf1<HttpContextBase>(() => new StubHttpContextBase { RequestGet = () => request });
+                    ShimTabContextExtensions.GetMessagesOf1ITabContext<StateRouteHandler.GetDisplayInfoForPage.Message>(t =>
+                        new List<StateRouteHandler.GetDisplayInfoForPage.Message>());
+                    ShimTabContextExtensions.GetMessagesOf1ITabContext<StateRouteHandler.GetPageForDisplayInfo.Message>(t =>
+                        new List<StateRouteHandler.GetPageForDisplayInfo.Message>());
+                    ShimTabContextExtensions.GetMessagesOf1ITabContext<StateRouteHandler.GetDisplayInfoForTheme.Message>(t =>
+                        new List<StateRouteHandler.GetDisplayInfoForTheme.Message>());
+                    ShimTabContextExtensions.GetMessagesOf1ITabContext<StateRouteHandler.GetThemeForDisplayInfo.Message>(t =>
+                        new List<StateRouteHandler.GetThemeForDisplayInfo.Message>());
+                    ShimTabContextExtensions.GetMessagesOf1ITabContext<StateRouteHandler.GetDisplayInfoForMaster.Message>(t =>
+                        new List<StateRouteHandler.GetDisplayInfoForMaster.Message>());
+                    ShimTabContextExtensions.GetMessagesOf1ITabContext<StateRouteHandler.GetMasterForDisplayInfo.Message>(t =>
+                        new List<StateRouteHandler.GetMasterForDisplayInfo.Message>());
+                    var elements = (CanvasData)new NavigationTab().GetData(tabContext);
+                    return Tuple.Create(elements.States, elements.Transitions);
+                }
+            }
+        }
+
         [ClassInitialize]
         public static void Initialize(TestContext testContext)
         {
             using (ShimsContext.Create())
             {
-                StateController.Navigate("D1");
-                var tabContext = new StubITabContext();
-                var request = new StubHttpRequestBase();
-                request.ItemGetString = k => string.Empty;
-                tabContext.GetRequestContextOf1<HttpContextBase>(() => new StubHttpContextBase { RequestGet = () => request });
-                ShimTabContextExtensions.GetMessagesOf1ITabContext<StateRouteHandler.GetDisplayInfoForPage.Message>(t =>
-                    new List<StateRouteHandler.GetDisplayInfoForPage.Message>());
-                ShimTabContextExtensions.GetMessagesOf1ITabContext<StateRouteHandler.GetPageForDisplayInfo.Message>(t =>
-                    new List<StateRouteHandler.GetPageForDisplayInfo.Message>());
-                ShimTabContextExtensions.GetMessagesOf1ITabContext<StateRouteHandler.GetDisplayInfoForTheme.Message>(t =>
-                    new List<StateRouteHandler.GetDisplayInfoForTheme.Message>());
-                ShimTabContextExtensions.GetMessagesOf1ITabContext<StateRouteHandler.GetThemeForDisplayInfo.Message>(t =>
-                    new List<StateRouteHandler.GetThemeForDisplayInfo.Message>());
-                ShimTabContextExtensions.GetMessagesOf1ITabContext<StateRouteHandler.GetDisplayInfoForMaster.Message>(t =>
-                    new List<StateRouteHandler.GetDisplayInfoForMaster.Message>());
-                ShimTabContextExtensions.GetMessagesOf1ITabContext<StateRouteHandler.GetMasterForDisplayInfo.Message>(t =>
-                    new List<StateRouteHandler.GetMasterForDisplayInfo.Message>());
-                var elements = (CanvasData)new NavigationTab().GetData(tabContext);
-                StateElements = elements.States;
-                TransitionElements = elements.Transitions;
+                var elements = Elements;
+                StateElements = elements.Item1;
+                TransitionElements = elements.Item2;
             }
         }
 
@@ -621,6 +634,30 @@ namespace NavigationGlimpse.Test
         public void WidenStateWTo180For9Transitions()
         {
             Assert.AreEqual(180, GetState("D7.S1").W);
+        }
+
+        [TestMethod]
+        public void SetStatePage()
+        {
+            Assert.AreEqual("~/P1.aspx", GetState("D1.S1").Page);
+        }
+
+        [TestMethod]
+        public void SetStateMasters()
+        {
+            Assert.AreEqual("~/M2.master", GetState("D1.S2").Masters[0]);
+        }
+
+        [TestMethod]
+        public void SetStateRoute()
+        {
+            Assert.AreEqual("R3", GetState("D1.S3").Route);
+        }
+
+        [TestMethod]
+        public void SetStateTheme()
+        {
+            Assert.AreEqual("T4", GetState("D1.S4").Theme);
         }
     }
 }
