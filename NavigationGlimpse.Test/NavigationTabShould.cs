@@ -26,7 +26,7 @@ namespace NavigationGlimpse.Test
             set;
         }
 
-        private static Tuple<List<StateElement>, List<TransitionElement>> Elements
+        private static CanvasData CanvasData
         {
             get
             {
@@ -48,8 +48,7 @@ namespace NavigationGlimpse.Test
                         new List<StateRouteHandler.GetDisplayInfoForMaster.Message>());
                     ShimTabContextExtensions.GetMessagesOf1ITabContext<StateRouteHandler.GetMasterForDisplayInfo.Message>(t =>
                         new List<StateRouteHandler.GetMasterForDisplayInfo.Message>());
-                    var elements = (CanvasData)new NavigationTab().GetData(tabContext);
-                    return Tuple.Create(elements.States, elements.Transitions);
+                    return (CanvasData)new NavigationTab().GetData(tabContext);
                 }
             }
         }
@@ -60,9 +59,9 @@ namespace NavigationGlimpse.Test
             StateController.Navigate("D1");
             using (ShimsContext.Create())
             {
-                var elements = Elements;
-                StateElements = elements.Item1;
-                TransitionElements = elements.Item2;
+                var canvasData = CanvasData;
+                StateElements = canvasData.States;
+                TransitionElements = canvasData.Transitions;
             }
         }
 
@@ -702,8 +701,7 @@ namespace NavigationGlimpse.Test
             StateController.Navigate("T1");
             StateController.Navigate("T1");
             StateController.Navigate("T1");
-            var elements = Elements;
-            var states = elements.Item1;
+            var states = CanvasData.States;
             Assert.AreEqual(3, GetState(states, "D8.S1").Back);
             Assert.AreEqual(2, GetState(states, "D8.S2").Back);
             Assert.AreEqual(1, GetState(states, "D8.S3").Back);
@@ -717,8 +715,7 @@ namespace NavigationGlimpse.Test
             StateController.Navigate("T1");
             StateController.Navigate("T1");
             StateController.Navigate("T1");
-            var elements = Elements;
-            var states = elements.Item1;
+            var states = CanvasData.States;
             Assert.IsTrue(GetState(states, "D8.S3").Previous);
             Assert.IsFalse(GetState(states, "D8.S4").Previous);
         }
@@ -730,8 +727,7 @@ namespace NavigationGlimpse.Test
             StateController.Navigate("T1");
             StateController.Navigate("T1");
             StateController.Navigate("T1");
-            var elements = Elements;
-            var states = elements.Item1;
+            var states = CanvasData.States;
             Assert.IsFalse(GetState(states, "D8.S3").Current);
             Assert.IsTrue(GetState(states, "D8.S4").Current);
         }
@@ -743,8 +739,7 @@ namespace NavigationGlimpse.Test
             StateController.Navigate("T1", new NavigationData { { "n", 1 } });
             StateController.Navigate("T1", new NavigationData { { "s", "y" }, { "n", 2 } });
             StateController.Navigate("T1");
-            var elements = Elements;
-            var states = elements.Item1;
+            var states = CanvasData.States;
             Assert.AreEqual("x", GetState(states, "D8.S1").Data["s"]);
             Assert.IsNull(GetState(states, "D8.S1").Data["n"]);
             Assert.IsNull(GetState(states, "D8.S2").Data["s"]);
@@ -760,8 +755,7 @@ namespace NavigationGlimpse.Test
             StateController.Navigate("T1");
             StateController.Navigate("T1");
             StateController.Navigate("T1", new NavigationData { { "s", "z" }, { "n", 3 } });
-            var elements = Elements;
-            var states = elements.Item1;
+            var states = CanvasData.States;
             Assert.AreEqual("z", GetState(states, "D8.S4").Data["s"]);
             Assert.AreEqual(3, GetState(states, "D8.S4").Data["n"]);
         }
@@ -770,8 +764,7 @@ namespace NavigationGlimpse.Test
         public void SetDefaultData()
         {
             StateController.Navigate("D8");
-            var elements = Elements;
-            var states = elements.Item1;
+            var states = CanvasData.States;
             Assert.AreEqual("a", GetState(states, "D8.S4").Data["s"]);
             Assert.AreEqual(4, GetState(states, "D8.S4").Data["n"]);
         }
