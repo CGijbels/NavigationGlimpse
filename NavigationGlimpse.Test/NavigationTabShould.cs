@@ -770,13 +770,10 @@ namespace NavigationGlimpse.Test
         public void SetDefaultData()
         {
             StateController.Navigate("D8");
-            StateController.Navigate("T1");
-            StateController.Navigate("T1");
-            StateController.Navigate("T1");
             var elements = Elements;
             var states = elements.Item1;
-            Assert.AreEqual("a", GetState(states, "D1.S5").Data["s"]);
-            Assert.AreEqual(4, GetState(states, "D1.S5").Data["n"]);
+            Assert.AreEqual("a", GetState(states, "D8.S4").Data["s"]);
+            Assert.AreEqual(4, GetState(states, "D8.S4").Data["n"]);
         }
     }
 }
