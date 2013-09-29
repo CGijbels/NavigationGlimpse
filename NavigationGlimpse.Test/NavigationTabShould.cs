@@ -610,5 +610,17 @@ namespace NavigationGlimpse.Test
         {
             Assert.AreEqual(60, GetTransition("D5.S3.T2").H);
         }
+
+        [TestMethod]
+        public void WidenStateWTo160For4SelfTransitions()
+        {
+            Assert.AreEqual(160, GetState("D6.S1").W);
+        }
+
+        [TestMethod]
+        public void WidenStateWTo180For9Transitions()
+        {
+            Assert.AreEqual(180, GetState("D7.S1").W);
+        }
     }
 }
