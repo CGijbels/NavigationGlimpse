@@ -698,6 +698,7 @@ namespace NavigationGlimpse.Test
             Assert.IsTrue(GetState(states, "D8.S3").Previous);
             Assert.IsFalse(GetState(states, "D8.S4").Previous);
         }
+
         [TestMethod]
         public void SetCurrentState()
         {
@@ -709,6 +710,23 @@ namespace NavigationGlimpse.Test
             var states = elements.Item1;
             Assert.IsFalse(GetState(states, "D8.S3").Current);
             Assert.IsTrue(GetState(states, "D8.S4").Current);
+        }
+
+        [TestMethod]
+        public void SetCrumbData()
+        {
+            StateController.Navigate("D8", new NavigationData { { "s", "x" } });
+            StateController.Navigate("T1", new NavigationData { { "n", 1 } });
+            StateController.Navigate("T1", new NavigationData { { "s", "y" }, { "n", 2 } });
+            StateController.Navigate("T1");
+            var elements = Elements;
+            var states = elements.Item1;
+            Assert.AreEqual("x", GetState(states, "D8.S1").Data["s"]);
+            Assert.IsNull(GetState(states, "D8.S1").Data["n"]);
+            Assert.IsNull(GetState(states, "D8.S2").Data["s"]);
+            Assert.AreEqual(1, GetState(states, "D8.S2").Data["n"]);
+            Assert.AreEqual("y", GetState(states, "D8.S3").Data["s"]);
+            Assert.AreEqual(2, GetState(states, "D8.S3").Data["n"]);
         }
     }
 }
