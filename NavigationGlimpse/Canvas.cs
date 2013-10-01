@@ -72,6 +72,7 @@ namespace NavigationGlimpse
             }
             var selected = stateElements.First(s => s.Current);
             var selectedDialogTrans = transitionElements.Where(t => t.Transition.Parent.Parent == selected.State.Parent).DefaultIfEmpty();
+            var lastState = stateElements.Last();
             return new CanvasData
             {
                 States = stateElements,
@@ -79,7 +80,7 @@ namespace NavigationGlimpse
                 X = Math.Min(0, Width - Math.Min(selected.X + selected.W + Left, selected.X + Width - Left)),
                 Y = Math.Min(0, Height - Math.Min(selectedDialogTrans.Max(t => t != null ? t.Y + t.H : 0) + PaddingY + FontSize, selected.Y + Height - Top)),
                 W = Math.Max(Width, stateElements.Max(s => s.X + s.W) + Left),
-                H = Math.Max(Height, transitionElements.DefaultIfEmpty().Max(t => t != null ? t.Y + t.H : 0) + PaddingY + FontSize)
+                H = Math.Max(Height, transitionElements.DefaultIfEmpty().Max(t => t != null ? t.Y + t.H : lastState.Y + lastState.H) + PaddingY + FontSize)
             };
         }
 
