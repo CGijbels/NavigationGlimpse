@@ -68,6 +68,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Login.aspx" />
     <Content Include="Page1.aspx" />
     <Content Include="Page1.Mobile.aspx" />
     <Content Include="Page2.aspx" />
@@ -79,6 +80,13 @@
     <Compile Include="CustomData.cs" />
     <Compile Include="CustomDataTypeConverter.cs" />
     <Compile Include="GlimpseSecurityPolicy.cs" />
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Master1.Master.cs">
       <DependentUpon>Master1.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>

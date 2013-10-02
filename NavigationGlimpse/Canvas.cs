@@ -70,7 +70,7 @@ namespace NavigationGlimpse
                 }
                 stateY += Top + StateHeight + depths.Count * TransitionStepHeight + FontSize;
             }
-            var selected = stateElements.First(s => s.Current);
+            var selected = stateElements.FirstOrDefault(s => s.Current) ?? new StateElement(new State());
             var selectedDialogTrans = transitionElements.Where(t => t.Transition.Parent.Parent == selected.State.Parent).DefaultIfEmpty();
             var lastState = stateElements.Last();
             return new CanvasData

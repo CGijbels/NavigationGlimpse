@@ -16,13 +16,15 @@ namespace NavigationGlimpse
             var request = context.GetRequestContext<HttpContextBase>();
             var mobile = request.Request["n0"] == null ? request.GetOverriddenBrowser().IsMobileDevice : 
                 request.Request["n0"].StartsWith("Mobile", StringComparison.Ordinal);
-            return Canvas.Arrange(new StateDisplayInfo
+            var stateDisplayInfo = new StateDisplayInfo();
+            if (StateContext.State != null)
             {
-                Page = GetCurrentPage(context, mobile),
-                Route = GetCurrentRoute(mobile),
-                Theme = GetCurrentTheme(context, mobile),
-                Masters = GetCurrentMasters(context, mobile)
-            });
+                stateDisplayInfo.Page = GetCurrentPage(context, mobile);
+                stateDisplayInfo.Route = GetCurrentRoute(mobile);
+                stateDisplayInfo.Theme = GetCurrentTheme(context, mobile);
+                stateDisplayInfo.Masters = GetCurrentMasters(context, mobile);
+            }
+            return Canvas.Arrange(stateDisplayInfo);
         }
 
         private string GetCurrentPage(ITabContext context, bool mobile)
