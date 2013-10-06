@@ -24,7 +24,7 @@ namespace NavigationGlimpse
                             Navigation.StateRouteHandler newHandler = null;
                             alternateBaseImplementation.TryCreate(originalHandler, out newHandler, null, new object[] { originalHandler.State });
                             stateRoute.RouteHandler = newHandler;
-                            context.Logger.Info("");
+                            context.Logger.Info(Resources.RouteSetupReplacedRouteHandler, stateRoute.Url);
                         }
                     }
                 }
